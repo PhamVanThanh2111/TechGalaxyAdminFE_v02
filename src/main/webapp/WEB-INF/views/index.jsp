@@ -41,19 +41,19 @@
 </head>
 
 <body id="page-top">
-<%--<c:if test="${not empty errorMessage}">--%>
-<%--    <div class="toast-container position-fixed top-0 end-0 p-3">--%>
-<%--        <div id="errorToast" class="toast error-toast" role="alert" aria-live="assertive" aria-atomic="true">--%>
-<%--            <div class="toast-header">--%>
-<%--                <strong class="me-auto">Unsuccessful!</strong>--%>
-<%--                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>--%>
-<%--            </div>--%>
-<%--            <div class="toast-body">--%>
-<%--                    ${errorMessage}--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</c:if>--%>
+<c:if test="${not empty errorMessage}">
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="errorToast" class="toast error-toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Unsuccessful!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                    ${errorMessage}
+            </div>
+        </div>
+    </div>
+</c:if>
 <!-- Page Wrapper -->
 <div id="wrapper">
 
@@ -300,9 +300,9 @@
     var errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
 
     // Hiển thị các toast
-<%--    <c:if test="${not empty errorMessage}">--%>
-<%--        errorToast.show();--%>
-<%--    </c:if>--%>
+    <c:if test="${not empty errorMessage}">
+        errorToast.show();
+    </c:if>
 </script>
 
 </body>

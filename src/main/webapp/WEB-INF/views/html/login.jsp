@@ -61,31 +61,31 @@
 <body class="bg-gradient-primary">
 
 <div class="container">
-<%--    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">--%>
-<%--        <!-- Success Toast -->--%>
-<%--        <c:if test="${not empty successMessage}">--%>
-<%--            <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">--%>
-<%--                <div class="d-flex">--%>
-<%--                    <div class="toast-body">--%>
-<%--                            ${successMessage}--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </c:if>--%>
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+        <!-- Success Toast -->
+        <c:if test="${not empty successMessage}">
+            <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                            ${successMessage}
+                    </div>
+                </div>
+            </div>
+        </c:if>
 
 
-<%--        <c:if test="${param.error == 'true'}">--%>
-<%--            <div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">--%>
-<%--                <div class="d-flex">--%>
-<%--                    <div class="toast-body">--%>
-<%--                        Invalid username or password. Please try again.--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+        <c:if test="${param.error == 'true'}">
+            <div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Invalid username or password. Please try again.
+                    </div>
+                </div>
+            </div>
 
-<%--        </c:if>--%>
+        </c:if>
 
-<%--    </div>--%>
+    </div>
     <!-- Outer Row -->
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -148,25 +148,25 @@
     </div>
 
 </div>
-<%--<script>--%>
-<%--    --%>
-<%--    // Wait until DOM is fully loaded--%>
-<%--    document.addEventListener("DOMContentLoaded", function () {--%>
-<%--        // Initialize and show success toast--%>
-<%--        const successToastElement = document.getElementById('successToast');--%>
-<%--        if (successToastElement) {--%>
-<%--            const successToast = new bootstrap.Toast(successToastElement, { delay: 5000 }); // 5s delay--%>
-<%--            successToast.show();--%>
-<%--        }--%>
+<script>
 
-<%--        // Initialize and show error toast--%>
-<%--        const errorToastElement = document.getElementById('errorToast');--%>
-<%--        if (errorToastElement) {--%>
-<%--            const errorToast = new bootstrap.Toast(errorToastElement, { delay: 5000 }); // 5s delay--%>
-<%--            errorToast.show();--%>
-<%--        }--%>
-<%--    });--%>
-<%--</script>--%>
+    // Wait until DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", function () {
+        // Initialize and show success toast
+        const successToastElement = document.getElementById('successToast');
+        if (successToastElement) {
+            const successToast = new bootstrap.Toast(successToastElement, { delay: 5000 }); // 5s delay
+            successToast.show();
+        }
+
+        // Initialize and show error toast
+        const errorToastElement = document.getElementById('errorToast');
+        if (errorToastElement) {
+            const errorToast = new bootstrap.Toast(errorToastElement, { delay: 5000 }); // 5s delay
+            errorToast.show();
+        }
+    });
+</script>
 <!-- Custom scripts for all pages-->
 <script src="<c:url value="/js/sb-admin-2.min.js" />"></script>
 <script src="<c:url value='/jquery/jquery.min.js' />"></script>
