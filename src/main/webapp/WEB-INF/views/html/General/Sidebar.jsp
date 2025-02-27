@@ -121,6 +121,28 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountManage"
+           aria-expanded="true" aria-controls="accountManage">
+            <i class="fa-solid fa-universal-access"></i>
+            <span>Account</span>
+        </a>
+        <div id="accountManage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Account Manage</h6>
+                <a class="collapse-item" href="${pageContext.request.contextPath}/accounts">Show</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Technical Specification
+    </div>
+
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#trademarkManage"
            aria-expanded="true" aria-controls="trademarkManage">
             <i class="fa-solid fa-trademark"></i>
@@ -136,20 +158,51 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountManage"
-           aria-expanded="true" aria-controls="accountManage">
-            <i class="fa-solid fa-universal-access"></i>
-            <span>Account</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#memoryManage"
+           aria-expanded="true" aria-controls="memoryManage">
+            <i class="fa-solid fa-memory"></i>
+            <span>Memory</span>
         </a>
-        <div id="accountManage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="memoryManage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Account Manage</h6>
-                <a class="collapse-item" href="${pageContext.request.contextPath}/accounts">Show</a>
+                <h6 class="collapse-header">Memory Manage</h6>
+                <a class="collapse-item" href="">Show</a>
+                <a class="collapse-item" href="">Add</a>
             </div>
         </div>
     </li>
 
-    <!-- Sidebar Toggler (Sidebar) -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#colorManage"
+           aria-expanded="true" aria-controls="colorManage">
+            <i class="fa-solid fa-palette"></i>
+            <span>Color</span>
+        </a>
+        <div id="colorManage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Color Manage</h6>
+                <a class="collapse-item" href="">Show</a>
+                <a class="collapse-item" href="">Add</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#usageCategoryManage"
+           aria-expanded="true" aria-controls="usageCategoryManage">
+            <i class="fa-solid fa-heart"></i>
+            <span>Usage Category</span>
+        </a>
+        <div id="usageCategoryManage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Usage Category Manage</h6>
+                <a class="collapse-item" href="">Show</a>
+                <a class="collapse-item" href="">Add</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Sidebar Toggles (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
