@@ -1,8 +1,8 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.CustomerStatus;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.Gender;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.CustomerStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
