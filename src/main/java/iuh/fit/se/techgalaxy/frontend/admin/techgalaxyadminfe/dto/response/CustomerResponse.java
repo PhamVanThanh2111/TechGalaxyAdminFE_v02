@@ -1,8 +1,8 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response;
 
-import iuh.fit.se.techgalaxy.frontend.admin.entities.Account;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.CustomerStatus;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.Gender;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.Account;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.CustomerStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.Gender;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

@@ -1,6 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response;
 
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.DetailStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.DetailStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

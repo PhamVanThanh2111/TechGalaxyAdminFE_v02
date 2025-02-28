@@ -1,7 +1,7 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request;
 
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.ProductStatus;
-import iuh.fit.se.techgalaxy.frontend.admin.validate.DiscountConstraint;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.ProductStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.validate.DiscountConstraint;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;

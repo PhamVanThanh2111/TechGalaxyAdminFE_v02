@@ -1,6 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request;
 
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.ProductStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.ProductStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.multipart.MultipartFile;

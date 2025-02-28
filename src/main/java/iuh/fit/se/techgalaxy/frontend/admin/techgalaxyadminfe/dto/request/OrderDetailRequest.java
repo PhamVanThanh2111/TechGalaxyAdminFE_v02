@@ -1,8 +1,8 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request;
 
-import iuh.fit.se.techgalaxy.frontend.admin.dto.response.OrderResponse;
-import iuh.fit.se.techgalaxy.frontend.admin.dto.response.ProductVariantDetailResponse;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.DetailStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response.OrderResponse;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response.ProductVariantDetailResponse;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.DetailStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

@@ -1,9 +1,9 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request;
 
-import iuh.fit.se.techgalaxy.frontend.admin.entities.Role;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.Gender;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.SystemUserLevel;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.SystemUserStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.Role;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.Gender;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.SystemUserLevel;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.SystemUserStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

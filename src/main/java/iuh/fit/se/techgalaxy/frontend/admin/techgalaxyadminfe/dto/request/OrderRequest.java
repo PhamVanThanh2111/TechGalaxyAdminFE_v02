@@ -1,9 +1,9 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request;
 
-import iuh.fit.se.techgalaxy.frontend.admin.dto.response.CustomerResponse;
-import iuh.fit.se.techgalaxy.frontend.admin.dto.response.SystemUserResponse;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.OrderStatus;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.enumeration.PaymentStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response.CustomerResponse;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response.SystemUserResponse;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.OrderStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.PaymentStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

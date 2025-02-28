@@ -1,6 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request;
 
-import iuh.fit.se.techgalaxy.frontend.admin.entities.ProductVariantDetail;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.ProductVariantDetail;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
