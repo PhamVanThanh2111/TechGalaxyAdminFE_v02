@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,19 +39,19 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String saveFullProduct() {
+    public ModelAndView saveFullProduct() {
 
         try {
-            return "redirect:/products";
+            return new ModelAndView("redirect:/products");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         }
     }
 
@@ -90,21 +91,21 @@ public class ProductController {
 
 
     @PostMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable String id, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
+    public ModelAndView deleteProduct(@PathVariable String id, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
         try {
             System.out.println("Deleting product: " + id);
 
-            return "redirect:/products";
+            return new ModelAndView("redirect:/products");
 
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error deleting product: " + e.getMessage());
-            return "redirect:/products";
+            return new ModelAndView("redirect:/products");
         }
     }
 
@@ -185,56 +186,56 @@ public class ProductController {
     }
 
     @PostMapping("/variants/update/{variantId}")
-    public String updateVariant(@PathVariable String variantId, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
+    public ModelAndView updateVariant(@PathVariable String variantId, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
 
         try {
-            return "redirect:/products";
+            return new ModelAndView("redirect:/products");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (Exception e) {
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         }
     }
 
 
     @PostMapping("/variants/delete/{variantId}")
-    public String deleteVariant(@PathVariable String variantId, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
+    public ModelAndView deleteVariant(@PathVariable String variantId, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
 
         try {
-            return "redirect:/products";
+            return new ModelAndView("redirect:/products");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error deleting product variant: " + e.getMessage());
-            return "redirect:/products";
+            return new ModelAndView("redirect:/products");
         }
     }
 
 
     @PostMapping("variants/details/delete/{variantDetailId}")
-    public String deleteVariantDetail(@PathVariable String variantDetailId, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
+    public ModelAndView deleteVariantDetail(@PathVariable String variantDetailId, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
 
         try {
 
             redirectAttributes.addFlashAttribute("successMessage", "Product variant detail deleted successfully: " + variantDetailId);
-            return "redirect:/products";
+            return new ModelAndView("redirect:/products");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error deleting product variant detail: " + e.getMessage());
-            return "redirect:/products";
+            return new ModelAndView("redirect:/products");
         }
     }
 
@@ -257,7 +258,7 @@ public class ProductController {
     }
 
     @PostMapping("/{productId}/variants/add")
-    public String saveVariant(@PathVariable String productId,
+    public ModelAndView saveVariant(@PathVariable String productId,
 
                               RedirectAttributes redirectAttributes,
                               HttpSession session,
@@ -265,16 +266,16 @@ public class ProductController {
 
         try {
 
-            return "redirect:/products/" + productId + "/variants";
+            return new ModelAndView("redirect:/products/)" + productId + "/variants");
 
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         } catch (Exception e) {
-            return "redirect:/home";
+            return new ModelAndView("redirect:/home");
         }
 
     }
@@ -301,7 +302,7 @@ public class ProductController {
 
 
     @PostMapping("/{productId}/variants/{variantId}/details/add")
-    public String saveVariantDetail(
+    public ModelAndView saveVariantDetail(
             @PathVariable String productId,
             @PathVariable String variantId,
             RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
@@ -310,19 +311,19 @@ public class ProductController {
             redirectAttributes.addFlashAttribute("successMessage", "Variant detail added successfully!");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error adding variant detail: " + e.getMessage());
         }
-        return "redirect:/products/" + productId + "/variants/" + variantId + "/details";
+        return new ModelAndView("redirect:/products/" + productId + "/variants/" + variantId + "/details");
     }
 
 
     @GetMapping("/{productId}/variants/{variantId}/details/{detailId}")
-    public String viewDetail(
+    public ModelAndView viewDetail(
             @PathVariable String productId,
             @PathVariable String variantId,
             @PathVariable String detailId,
@@ -330,40 +331,40 @@ public class ProductController {
 
         try {
 
-            return "html/Phone/detailVariantsDetails";
+            return new ModelAndView("html/Phone/)detailVariantsDetails");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
 
     @GetMapping("/{productId}/variants/{variantId}/details/update/{detailId}")
-    public String showUpdateDetailForm(
+    public ModelAndView showUpdateDetailForm(
             @PathVariable String productId,
             @PathVariable String variantId,
             @PathVariable String detailId,
             Model model, HttpSession session, HttpServletResponse response) {
         try {
-            return "html/Phone/updateDetail";
+            return new ModelAndView("html/Phone/updateDetail");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
     @PostMapping("/{productId}/variants/{variantId}/details/update/{detailId}")
-    public String updateDetail(
+    public ModelAndView updateDetail(
             @PathVariable String productId,
             @PathVariable String variantId,
             @PathVariable String detailId,
@@ -376,10 +377,10 @@ public class ProductController {
 
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Invalid product status: " + e.getMessage());
         } catch (Exception e) {
@@ -387,63 +388,62 @@ public class ProductController {
         }
 
         // Điều hướng về trang chi tiết
-        return "redirect:/products/" + productId + "/variants/" + variantId + "/details";
+        return new ModelAndView("redirect:/products/" + productId + "/variants/" + variantId + "/details");
     }
 
     @GetMapping("/{productId}/variants/{variantId}")
-    public String showDetailVariant(@PathVariable String productId, @PathVariable String variantId, Model model, HttpSession session, HttpServletResponse response) {
+    public ModelAndView showDetailVariant(@PathVariable String productId, @PathVariable String variantId, Model model, HttpSession session, HttpServletResponse response) {
 
         try {
-
-            return "html/Phone/detailVariants";
+            return new ModelAndView("html/Phone/detailVariants");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
     @GetMapping("/{productId}/variants/{variantId}/attributes")
-    public String showAttributesByVariant(@PathVariable String productId, @PathVariable String variantId, Model model, HttpSession session, HttpServletResponse response) {
+    public ModelAndView showAttributesByVariant(@PathVariable String productId, @PathVariable String variantId, Model model, HttpSession session, HttpServletResponse response) {
 
         try {
 
-            return "html/Phone/showAttribute";
+            return new ModelAndView("html/Phone/showAttribute");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
     @GetMapping("/{productId}/variants/{variantId}/attributes/create")
-    public String showCreateAttributeValueForm(@PathVariable String productId,
+    public ModelAndView showCreateAttributeValueForm(@PathVariable String productId,
                                                @PathVariable String variantId,
                                                Model model, HttpSession session, HttpServletResponse response) {
         try {
 
-            return "html/Phone/createAttributeValue";
+            return new ModelAndView("html/Phone/createAttributeValue");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
     @PostMapping("/{productId}/variants/{variantId}/attributes/create")
-    public String createAttributeValueByVariantId(
+    public ModelAndView createAttributeValueByVariantId(
             @PathVariable String productId,
             @PathVariable String variantId,
             RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response1) {
@@ -451,75 +451,75 @@ public class ProductController {
         try {
 
             // Redirect back to the attributes page
-            return "redirect:/products/" + productId + "/variants/" + variantId + "/attributes";
+            return new ModelAndView("redirect:/products/" + productId + "/variants/" + variantId + "/attributes");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
     @PostMapping("/{productId}/variants/{variantId}/attributes/delete/{valueId}")
-    public String deleteAttributeValue(
+    public ModelAndView deleteAttributeValue(
             @PathVariable String productId,
             @PathVariable String variantId,
             @PathVariable String valueId,
             RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response1) {
         try {
 
-            return "redirect:/products/" + productId + "/variants/" + variantId + "/attributes";
+            return new ModelAndView("redirect:/products/" + productId + "/variants/" + variantId + "/attributes");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
     @GetMapping("/{productId}/variants/{variantId}/attributes/update/{valueId}")
-    public String showUpdateAttributeValueForm(
+    public ModelAndView showUpdateAttributeValueForm(
             @PathVariable String productId,
             @PathVariable String variantId,
             @PathVariable String valueId,
             Model model, HttpSession session, HttpServletResponse response1) {
         try {
 
-            return "html/Phone/updateValue";
+            return new ModelAndView("html/Phone/updateValue");
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
     @PostMapping("/{productId}/variants/{variantId}/attributes/update/{valueId}")
-    public String updateAttributeValue(
+    public ModelAndView updateAttributeValue(
             @PathVariable String productId,
             @PathVariable String variantId,
             RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response1) {
         try {
 
-            return "redirect:/products/" + productId + "/variants/" + variantId + "/attributes";
+            return new ModelAndView("redirect:/products/" + productId + "/variants/" + variantId + "/attributes");
 
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (HttpClientErrorException.Forbidden e) {
             System.out.println("Forbidden request: " + e.getMessage());
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         } catch (Exception e) {
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
     }
 
