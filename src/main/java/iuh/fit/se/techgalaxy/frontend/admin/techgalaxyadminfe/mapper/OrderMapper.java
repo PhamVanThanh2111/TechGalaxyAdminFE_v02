@@ -1,8 +1,8 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.mapper;
 
-import iuh.fit.se.techgalaxy.frontend.admin.dto.request.OrderRequest;
-import iuh.fit.se.techgalaxy.frontend.admin.dto.response.OrderResponse;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.Order;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.OrderRequest;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response.OrderResponse;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

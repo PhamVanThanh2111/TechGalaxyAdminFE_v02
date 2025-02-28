@@ -1,12 +1,12 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.mapper;
 
-import iuh.fit.se.techgalaxy.frontend.admin.dto.request.ProductDetailUpdateRequest;
-import iuh.fit.se.techgalaxy.frontend.admin.dto.request.ProductVariantDetailRequest;
-import iuh.fit.se.techgalaxy.frontend.admin.dto.response.ProductVariantDetailResponse;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.Color;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.Memory;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.ProductVariant;
-import iuh.fit.se.techgalaxy.frontend.admin.entities.ProductVariantDetail;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.ProductDetailUpdateRequest;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.ProductVariantDetailRequest;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response.ProductVariantDetailResponse;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.Color;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.Memory;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.ProductVariant;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.ProductVariantDetail;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
