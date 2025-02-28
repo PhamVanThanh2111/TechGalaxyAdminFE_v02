@@ -1,5 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.controllers;
 
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.SystemUserRequestDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +22,15 @@ public class SystemUserController {
     }
 
     @GetMapping("/add")
-    public ModelAndView add(ModelAndView model) {
+    public ModelAndView addSystemUser(ModelAndView model) {
+        SystemUserRequestDTO requestDTO = new SystemUserRequestDTO();
+        model.addObject("systemUserRequestDTO", requestDTO);
         model.setViewName("html/SystemUser/formSystemUser");
         return model;
     }
 
     @GetMapping("/detail/{id}")
-    public ModelAndView detail(ModelAndView model) {
+    public ModelAndView detailSystemUser(ModelAndView model, @PathVariable String id) {
         model.setViewName("html/SystemUser/detailSystemUser");
         return model;
     }
