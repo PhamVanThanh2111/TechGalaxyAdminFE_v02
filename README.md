@@ -9,6 +9,6 @@ TechGalaxyAdminFE, which is frontend side Admin, Employee
 
 **[Launch Live Preview](https://startbootstrap.github.io/startbootstrap-sb-admin-2/)**
 
-**[Version 2.0]
+**[Version 2.0]**
 - Update SideBar
 - More functions like manage memory, color, usage category, attribute, role for Admin, Manager
