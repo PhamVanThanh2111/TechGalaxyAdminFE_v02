@@ -106,34 +106,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-<%--                                <c:forEach var="attribute" items="${attributes_values}">--%>
-<%--                                    <tr>--%>
-<%--                                        <td>${attribute.id}</td>--%>
-<%--                                        <td>${attribute.attributeName}</td>--%>
-<%--                                        <td>${attribute.value}</td>--%>
-<%--                                        <td>--%>
-<%--                                            <form action="/products/${productId}/variants/${variantId}/attributes/update/${attribute.id}" method="get" style="display:inline;">--%>
-<%--                                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>--%>
-<%--                                            </form>--%>
-<%--                                            <form action="/products/${productId}/variants/${variantId}/attributes/delete/${attribute.id}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this attribute?');">--%>
-<%--                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>--%>
-<%--                                            </form>--%>
-<%--                                        </td>--%>
-<%--                                    </tr>--%>
-<%--                                </c:forEach>--%>
+                                <c:forEach var="attribute" items="${attributes_values}">
                                     <tr>
-                                        <td>1</td>
-                                        <td>Color</td>
-                                        <td>Black</td>
+                                        <td>${attribute.id}</td>
+                                        <td>${attribute.attributeName}</td>
+                                        <td>${attribute.value}</td>
                                         <td>
-                                            <form action="/products/1/variants/1/attributes/update/1" method="get" style="display:inline;">
+                                            <form action="/products/${productId}/variants/${variantId}/attributes/update/${attribute.id}" method="get" style="display:inline;">
                                                 <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                             </form>
-                                            <form action="/products/1/variants/1/attributes/delete/1" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this attribute?');">
+                                            <form action="/products/${productId}/variants/${variantId}/attributes/delete/${attribute.id}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this attribute?');">
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

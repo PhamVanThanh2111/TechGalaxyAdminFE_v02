@@ -103,59 +103,25 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-<%--                                <c:forEach var="product" items="${products}">--%>
-<%--                                    <tr>--%>
-<%--                                        <td>${product.id}</td>--%>
-<%--                                        <td>${product.name}</td>--%>
-<%--                                        <td>--%>
-<%--                                            <form action="/products/edit/${product.id}" method="get" style="display:inline;">--%>
-<%--                                                <button type="submit" class="btn btn-primary">Edit</button>--%>
-<%--                                            </form>--%>
-
-<%--                                            <form action="/products/${product.id}/variants" method="get" style="display:inline;">--%>
-<%--                                                <button type="submit" class="btn btn-info">View Variants</button>--%>
-<%--                                            </form>--%>
-
-<%--                                            <form action="/products/delete/${product.id}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">--%>
-<%--                                                <button type="submit" class="btn btn-danger">Delete</button>--%>
-<%--                                            </form>--%>
-<%--                                        </td>--%>
-<%--                                    </tr>--%>
-<%--                                </c:forEach>--%>
+                                <c:forEach var="product" items="${products}">
                                     <tr>
-                                        <td>1</td>
-                                        <td>Product 1</td>
+                                        <td>${product.id}</td>
+                                        <td>${product.name}</td>
                                         <td>
-                                            <form action="/products/edit/1" method="get" style="display:inline;">
+                                            <form action="/products/edit/${product.id}" method="get" style="display:inline;">
                                                 <button type="submit" class="btn btn-primary">Edit</button>
                                             </form>
 
-                                            <form action="/products/1/variants" method="get" style="display:inline;">
+                                            <form action="/products/${product.id}/variants" method="get" style="display:inline;">
                                                 <button type="submit" class="btn btn-info">View Variants</button>
                                             </form>
 
-                                            <form action="/products/delete/1" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                            <form action="/products/delete/${product.id}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Product 2</td>
-                                        <td>
-                                            <form action="/products/edit/2" method="get" style="display:inline;">
-                                                <button type="submit" class="btn btn-primary">Edit</button>
-                                            </form>
-
-                                            <form action="/products/2/variants" method="get" style="display:inline;">
-                                                <button type="submit" class="btn btn-info">View Variants</button>
-                                            </form>
-
-                                            <form action="/products/delete/2" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this product?');">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

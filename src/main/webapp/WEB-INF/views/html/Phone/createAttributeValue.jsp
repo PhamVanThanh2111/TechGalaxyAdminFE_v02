@@ -56,15 +56,14 @@
                         <h6 class="m-0 font-weight-bold text-primary">Add Attribute Value</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/1/variants/1/attributes/create" method="post">
+                        <form action="/products/${productId}/variants/${variantId}/attributes/create" method="post">
                             <div class="form-group">
                                 <label for="attributeId">Attribute</label>
                                 <select class="form-control" name="attributeId" required>
                                     <option value="">-- Select Attribute --</option>
-                                    <option value="0">Other</option>
-                                    <option value="-1">Camerra</option>
-                                    <option value="-2">Battery</option>
-                                    <option value="-3">Display</option>
+                                    <c:forEach var="attribute" items="${attributes}">
+                                        <option value="${attribute.id}">${attribute.name}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="form-group">

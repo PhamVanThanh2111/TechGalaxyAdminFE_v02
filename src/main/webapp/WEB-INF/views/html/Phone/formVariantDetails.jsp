@@ -58,17 +58,14 @@
                         <h6 class="m-0 font-weight-bold text-primary">Add Details</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/1/variants/1/details/add" method="post" enctype="multipart/form-data">
+                        <form action="/products/${productId}/variants/${variantId}/details/add" method="post" enctype="multipart/form-data">
                             <!-- Memory -->
                             <div class="form-group">
                                 <label for="memid">Memory</label>
                                 <select class="form-control" id="memid" name="memid" required>
-<%--                                    <c:forEach var="memory" items="${memories}">--%>
-<%--                                        <option value="${memory.id}">${memory.name}</option>--%>
-<%--                                    </c:forEach>--%>
-                                    <option value="1">8GB</option>
-                                    <option value="2">16GB</option>
-                                    <option value="3">32GB</option>
+                                    <c:forEach var="memory" items="${memories}">
+                                        <option value="${memory.id}">${memory.name}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
 
@@ -93,12 +90,9 @@
                                         <label for="colors[0].colorId">Color</label>
                                         <select class="form-control" id="colors[0].colorId" name="colors[0].colorId" required>
                                             <option value="">-- Select Color --</option>
-<%--                                            <c:forEach items="${availableColors}" var="color">--%>
-<%--                                                <option value="${color.id}">${color.name}</option>--%>
-<%--                                            </c:forEach>--%>
-                                            <option value="1">Black</option>
-                                            <option value="2">White</option>
-                                            <option value="3">Red</option>
+                                            <c:forEach items="${availableColors}" var="color">
+                                                <option value="${color.id}">${color.name}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                     <div class="form-group">

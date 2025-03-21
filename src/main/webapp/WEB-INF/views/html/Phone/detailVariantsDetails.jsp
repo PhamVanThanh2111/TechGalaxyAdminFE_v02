@@ -63,38 +63,44 @@
                             <tbody>
                             <tr>
                                 <th>ID</th>
-                                <td>1</td>
+                                <td>${detail.id}</td>
                             </tr>
                             <tr>
                                 <th>Status</th>
                                 <td>
-                                    <span class="badge badge-success">Active</span>
-
+                                    <c:choose>
+                                        <c:when test="${detail.status eq 'AVAILABLE'}">
+                                            <span class="badge badge-success">Available</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="badge badge-danger">Unavailable</span>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Memory</th>
-                                <td>12</td>
+                                <td>${detail.memory.name}</td>
                             </tr>
                             <tr>
                                 <th>Color</th>
-                                <td>Black</td>
+                                <td>${detail.color.name}</td>
                             </tr>
                             <tr>
                                 <th>Views</th>
-                                <td>123123</td>
+                                <td>${detail.viewsCount}</td>
                             </tr>
                             <tr>
                                 <th>Price</th>
-                                <td><fmt:formatNumber value="1231313" pattern="#,##0.00" /></td>
+                                <td><fmt:formatNumber value="${detail.price}" pattern="#,##0.00" /></td>
                             </tr>
                             <tr>
                                 <th>Sale (%)</th>
-                                <td><fmt:formatNumber value="12" pattern="#,##0.00" /></td>
+                                <td><fmt:formatNumber value="${detail.sale}" pattern="#,##0.00" /></td>
                             </tr>
                             <tr>
                                 <th>Quantity</th>
-                                <td>12424</td>
+                                <td>${detail.quantity}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -113,7 +119,7 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<jsp:include page="../General/LogoutModal.jsp"/>
+<jsp:include page="../layout/LogoutModal.jsp" />
 
 <!-- JavaScript -->
 <script src="<c:url value='/jquery/jquery.min.js' />"></script>

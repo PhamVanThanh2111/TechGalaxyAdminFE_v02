@@ -112,61 +112,42 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach var="variant" items="${variants}">
+                                    <tr>
+                                        <td>${variant.id}</td>
+                                        <td>${variant.name}</td>
+                                        <td>${variant.description}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${variant.featured}">
+                                                    <span class="badge badge-success">Yes</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="badge badge-secondary">No</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <form action="/products/${productId}/variants/${variant.id}" method="get" style="display:inline;">
+                                                <button type="submit" class="btn btn-warning btn-sm">Details</button>
+                                            </form>
+                                            <form action="/products/${productId}/variants/${variant.id}/details" method="get" style="display:inline;">
+                                                <button type="submit" class="btn btn-info btn-sm">Variants Details</button>
+                                            </form>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>Variant 1</td>
-                                    <td>Description 1</td>
-                                    <td>
-                                        <span class="badge badge-success">Yes</span>
-                                    </td>
-                                    <td>
-                                        <form action="/products/1/variants/1" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-warning btn-sm">Details</button>
-                                        </form>
-                                        <form action="/products/1/variants/1/details" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-info btn-sm">Variants Details</button>
-                                        </form>
+                                            <form action="/products/variants/edit/${variant.id}" method="get" style="display:inline;">
+                                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                            </form>
+                                            <form action="/products/${productId}/variants/${variant.id}/attributes" method="get" style="display:inline;">
+                                                <button type="submit" class="btn btn-primary btn-sm">Attribute</button>
+                                            </form>
 
-                                        <form action="/products/variants/edit/1" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                                        </form>
-                                        <form action="/products/1/variants/1/attributes" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-primary btn-sm">Attribute</button>
-                                        </form>
-
-                                        <form action="/products/variants/delete/1" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this variant?');">
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Variant 2</td>
-                                    <td>Description 2</td>
-                                    <td>
-                                        <span class="badge badge-secondary">No</span>
-                                    </td>
-                                    <td>
-                                        <form action="/products/2/variants/2" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-warning btn-sm">Details</button>
-                                        </form>
-                                        <form action="/products/2/variants/2/details" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-info btn-sm">Variants Details</button>
-                                        </form>
-
-                                        <form action="/products/variants/edit/2" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                                        </form>
-                                        <form action="/products/2/variants/2/attributes" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-primary btn-sm">Attribute</button>
-                                        </form>
-
-                                        <form action="/products/variants/delete/2" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this variant?');">
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                            <form action="/products/variants/delete/${variant.id}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this variant?');">
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

@@ -97,41 +97,27 @@
                             <div class="card-body">
                                 <form:form id="addProductForm" role="form"
                                            action="${pageContext.request.contextPath}/products/add"
-                                           method="POST" cssClass="needs-validation"
+                                           method="POST" modelAttribute="productFullRequest" cssClass="needs-validation"
                                            enctype="multipart/form-data">
                                     <!-- Thông tin cơ bản của sản phẩm -->
                                     <div class="form-group mb-3">
-<%--                                        <label for="name" class="form-label font-weight-bold">Tên Sản Phẩm</label>--%>
-<%--                                        <form:input path="name" class="form-control form-control-user" id="name"--%>
-<%--                                                    placeholder="Nhập tên sản phẩm" required="true"/>--%>
-                                        <label for="name" class="form-label font-weight-bold">Product Name</label>
-                                            <input type="text" id="name" name="name" class="form-control"/>
-<%--                                        <form:errors path="name" cssClass="text-danger"/>--%>
+                                        <label for="name" class="form-label font-weight-bold">Tên Sản Phẩm</label>
+                                        <form:input path="name" class="form-control form-control-user" id="name"
+                                                    placeholder="Nhập tên sản phẩm" required="true"/>
+                                        <form:errors path="name" cssClass="text-danger"/>
                                         <small class="text-danger"></small>
                                     </div>
 
                                     <!-- Combobox Trademark -->
                                     <div class="form-group mb-3">
                                         <label for="trademark" class="form-label font-weight-bold">Trademark</label>
-<%--                                        <form:select path="trademarkId" class="form-control" id="trademark">--%>
-<%--                                            <form:options items="${trademarks}" itemValue="id" itemLabel="name"/>--%>
-<%--                                        </form:select>--%>
-<%--                                        <form:errors path="trademarkId" cssClass="text-danger"/>--%>
-                                        <select id="trademarkId" name="trademarkId" class="form-control">
-                                            <option value="1">Apple</option>
-                                            <option value="2">Samsung</option>
-                                            <option value="3">Xiaomi</option>
-                                        </select>
+                                        <form:select path="trademarkId" class="form-control" id="trademark">
+                                            <form:options items="${trademarks}" itemValue="id" itemLabel="name"/>
+                                        </form:select>
+                                        <form:errors path="trademarkId" cssClass="text-danger"/>
                                         <small class="text-danger"></small>
                                     </div>
 
-                                    <!-- Khu vực để thêm Variants -->
-                                    <div id="variantsContainer" class="mb-3">
-                                        <h4 class="font-weight-bold">Variants</h4>
-                                    </div>
-                                    <button type="button" class="btn btn-info mb-3" onclick="addVariant()">Add
-                                        Variant
-                                    </button>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">Save Product
                                     </button>
                                 </form:form>
@@ -144,46 +130,6 @@
     </div>
 </div>
 
-<!-- Templates -->
-<script id="usageCategoryTemplate" type="text/template">
-<%--    <c:forEach items="${usageCategories}" var="category">--%>
-<%--        <option value="${category.id}">${category.name}</option>--%>
-<%--    </c:forEach>--%>
-    <option value="0">Other</option>
-    <option value="1">Business</option>
-    <option value="2">Gaming</option>
-    <option value="3">Multimedia</option>
-</script>
-
-<script id="memoryTemplate" type="text/template">
-<%--    <c:forEach items="${memories}" var="memory">--%>
-<%--        <option value="${memory.id}">${memory.name}</option>--%>
-<%--    </c:forEach>--%>
-    <option value="0">Other</option>
-    <option value="1">4GB</option>
-    <option value="2">8GB</option>
-    <option value="3">16GB</option>
-    <option value="4">32GB</option>
-    <option value="5">64GB</option>
-    <option value="6">128GB</option>
-    <option value="7">256GB</option>
-    <option value="8">512GB</option>
-</script>
-
-<script id="colorTemplate" type="text/template">
-<%--    <c:forEach items="${colors}" var="color">--%>
-<%--        <option value="${color.id}">${color.name}</option>--%>
-<%--    </c:forEach>--%>
-    <option value="0">Other</option>
-    <option value="1">Black</option>
-    <option value="2">White</option>
-    <option value="3">Red</option>
-    <option value="4">Blue</option>
-    <option value="5">Green</option>
-    <option value="6">Yellow</option>
-    <option value="7">Pink</option>
-    <option value="8">Purple</option>
-</script>
 <script>
     // Wait until DOM is fully loaded
     document.addEventListener("DOMContentLoaded", function () {

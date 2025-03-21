@@ -93,7 +93,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Edit Detail</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/1/variants/1/details/update/1" method="post">
+                        <form action="/products/${productId}/variants/${variantId}/details/update/${detail.id}" method="post">
                             <!-- Price -->
                             <div class="form-group">
                                 <label for="price">Price</label>
@@ -110,13 +110,11 @@
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select class="form-control" id="status" name="status" required>
-<%--                                    <c:forEach items="${ProductStatus}" var="statusOption">--%>
-<%--                                        <option value="${statusOption}" <c:if test="${detail.status == statusOption}">selected</c:if>>--%>
-<%--                                                ${statusOption.displayName}--%>
-<%--                                        </option>--%>
-<%--                                    </c:forEach>--%>
-                                    <option value="ACTIVE" <c:if test="${detail.status == 'ACTIVE'}">selected</c:if>>Active</option>
-                                    <option value="INACTIVE" <c:if test="${detail.status == 'INACTIVE'}">selected</c:if>>Inactive</option>
+                                    <c:forEach items="${ProductStatus}" var="statusOption">
+                                        <option value="${statusOption}" <c:if test="${detail.status == statusOption}">selected</c:if>>
+                                                ${statusOption.displayName}
+                                        </option>
+                                    </c:forEach>
                                 </select>
                             </div>
 
@@ -144,7 +142,7 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<jsp:include page="../General/LogoutModal.jsp"/>
+<jsp:include page="../layout/LogoutModal.jsp" />
 <script>
     // Wait until DOM is fully loaded
     document.addEventListener("DOMContentLoaded", function () {

@@ -17,46 +17,46 @@ public class ProductFullRequest {
     @Size(min = 5, max = 24, message = "PRODUCT_NAME_INVALID")
     String name;
     String trademarkId;
-    List<ProductVariantRequest> variants;
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @FieldDefaults(level = AccessLevel.PRIVATE)
-    @ToString
-    public static class ProductVariantRequest {
-        String name;
-        String description;
-        String content;
-        MultipartFile avatar;
-        Boolean featured;
-        String usageCategoryId;
-        List<ProductVariantDetailRequest> details;
-
-        @Getter
-        @Setter
-        @NoArgsConstructor
-        @AllArgsConstructor
-        @FieldDefaults(level = AccessLevel.PRIVATE)
-        @ToString
-        public static class ProductVariantDetailRequest {
-            String memid;
-            Double price;
-            Double sale;
-            List<ColorRequest> colors;
-
-            @Getter
-            @Setter
-            @NoArgsConstructor
-            @AllArgsConstructor
-            @FieldDefaults(level = AccessLevel.PRIVATE)
-            @ToString
-            public static class ColorRequest {
-                String colorId;
-                Integer quantity;
-                MultipartFile[] images;
-            }
-        }
-    }
+//    List<ProductVariantRequest> variants;
+//
+//    @Getter
+//    @Setter
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    @FieldDefaults(level = AccessLevel.PRIVATE)
+//    @ToString
+//    public static class ProductVariantRequest {
+//        String name;
+//        String description;
+//        String content;
+//        MultipartFile avatar;
+//        Boolean featured;
+//        String usageCategoryId;
+//        List<ProductVariantDetailRequest> details;
+//
+//        @Getter
+//        @Setter
+//        @NoArgsConstructor
+//        @AllArgsConstructor
+//        @FieldDefaults(level = AccessLevel.PRIVATE)
+//        @ToString
+//        public static class ProductVariantDetailRequest {
+//            String memid;
+//            Double price;
+//            Double sale;
+//            List<ColorRequest> colors;
+//
+//            @Getter
+//            @Setter
+//            @NoArgsConstructor
+//            @AllArgsConstructor
+//            @FieldDefaults(level = AccessLevel.PRIVATE)
+//            @ToString
+//            public static class ColorRequest {
+//                String colorId;
+//                Integer quantity;
+//                MultipartFile[] images;
+//            }
+//        }
+//    }
 }

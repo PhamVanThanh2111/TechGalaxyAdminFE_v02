@@ -46,11 +46,11 @@
 
                 <!-- Page Heading -->
                 <div class="d-flex align-items-center mb-4">
-                    <a href="/products/1/variants" class="btn btn-outline-primary btn-lg me-3">
+                    <a href="/products/${productId}/variants" class="btn btn-outline-primary btn-lg me-3">
                         <i class="fas fa-arrow-left"></i> Back
                     </a>
                     <h1 class="h3 mb-0 text-gray-800">
-                        Variant: <span class="text-primary fw-bold">1</span>
+                        Variant: <span class="text-primary fw-bold">${variant.name}</span>
                     </h1>
                 </div>
 
@@ -61,19 +61,18 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
-                            <li class="list-group-item"><strong>ID:</strong> 1</li>
-                            <li class="list-group-item"><strong>Name:</strong> 2</li>
-                            <li class="list-group-item"><strong>Description:</strong> 4</li>
-                            <li class="list-group-item"><strong>Content:</strong> 5</li>
+                            <li class="list-group-item"><strong>ID:</strong> ${variant.id}</li>
+                            <li class="list-group-item"><strong>Name:</strong> ${variant.name}</li>
+                            <li class="list-group-item"><strong>Description:</strong> ${variant.description}</li>
+                            <li class="list-group-item"><strong>Content:</strong> ${variant.content}</li>
                             <li class="list-group-item"><strong>Featured:</strong>
-<%--                                <c:choose>--%>
-<%--                                    <c:when test="${variant.featured}">Yes</c:when>--%>
-<%--                                    <c:otherwise>No</c:otherwise>--%>
-<%--                                </c:choose>--%>
-                                <strong>Yes</strong>
+                                <c:choose>
+                                    <c:when test="${variant.featured}">Yes</c:when>
+                                    <c:otherwise>No</c:otherwise>
+                                </c:choose>
                             </li>
-                            <li class="list-group-item"><strong>Status:</strong> 6</li>
-                            <li class="list-group-item"><strong>Usage Category:</strong>8</li>
+                            <li class="list-group-item"><strong>Status:</strong> ${variant.status}</li>
+                            <li class="list-group-item"><strong>Usage Category:</strong> ${variant.usageCategory.name}</li>
                             <li class="list-group-item">
                                 <strong>Avatar:</strong>
                                 <c:if test="${not empty variant.avatar}">

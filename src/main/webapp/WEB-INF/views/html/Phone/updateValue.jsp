@@ -44,7 +44,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <a href="/products/1/variants/1/attributes" class="btn btn-outline-primary btn-lg">
+                    <a href="/products/${productId}/variants/${variantId}/attributes" class="btn btn-outline-primary btn-lg">
                         <i class="fas fa-arrow-left"></i> Back
                     </a>
                     <h1 class="h3 mb-0 text-gray-800">Update Attribute Value</h1>
@@ -56,9 +56,9 @@
                         <h6 class="m-0 font-weight-bold text-primary">Edit Attribute Value</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/1/variants/1/attributes/update/1" method="post">
+                        <form action="/products/${productId}/variants/${variantId}/attributes/update/${value.id}" method="post">
                             <div class="form-group">
-                                <input type="hidden" class="form-control" id="id" name="id" value="1" readonly>
+                                <input type="hidden" class="form-control" id="id" name="id" value="${value.id}" readonly>
                             </div>
                             <!-- Display Attribute Name -->
                             <div class="form-group">

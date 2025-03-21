@@ -82,18 +82,19 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <a href="/products/1/variants" class="btn btn-outline-primary btn-lg me-3 mr-5">
+                    <a href="/products/${productId}/variants" class="btn btn-outline-primary btn-lg me-3 mr-5">
                         <i class="fas fa-arrow-left"></i> Back
                     </a>
-                    <h1 class="h3 mb-0 text-gray-800">Details for Variant : <span class="text-primary">1</span></h1>
+                    <h1 class="h3 mb-0 text-gray-800">Details for Variant : <span class="text-primary">${variant.name}</span></h1>
                     <!-- Add Button -->
-                    <a href="/products/1/variants/1/details/add" class="btn btn-success btn-lg">
+                    <a href="/products/${productId}/variants/${variantId}/details/add" class="btn btn-success btn-lg">
                         <i class="fas fa-plus"></i> Add Variant Detail
                     </a>
                 </div>
 
 
                 <!-- Variant Details Table -->
+                <c:if test="${not empty detail}">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Details</h6>
@@ -113,55 +114,54 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <c:forEach var="detailItem" items="${detail}">
+                                    <c:forEach var="memoryEntry" items="${detailItem.memories}">
+                                        <c:forEach var="color" items="${memoryEntry.value}">
+                                            <tr>
+                                                <td>${detailItem.id}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${detailItem.status eq 'AVAILABLE'}">
+                                                            <span class="badge badge-success">Available</span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="badge badge-danger">Unavailable</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <!-- Hiển thị tên Memory -->
+                                                <td>${memoryMap[memoryEntry.key]}</td>
 
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <span class="badge badge-success">Available</span>
-                                    </td>
-                                    <td>8GB</td>
-                                    <td>Black</td>
-                                    <td>10,000,000</td>
-                                    <td>9,000,000</td>
-                                    <td>100</td>
-                                    <td>
-                                        <form action="/products/1/variants/1/details/update/1" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
-                                        </form>
-                                        <form action="/products/1/variants/1/details/1" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-info btn-sm">Detail</button>
-                                        </form>
-                                        <form action="/products/variants/details/delete/1" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this detail?');">
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <span class="badge badge-success">Available</span>
-                                    </td>
-                                    <td>8GB</td>
-                                    <td>White</td>
-                                    <td>10,000,000</td>
-                                    <td>9,000,000</td>
-                                    <td>100</td>
-                                    <td>
-                                        <form action="/products/1/variants/1/details/update/2" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
-                                        </form>
-                                        <form action="/products/1/variants/1/details/2" method="get" style="display:inline;">
-                                            <button type="submit" class="btn btn-info btn-sm">Detail</button>
-                                        </form>
-                                        <form action="/products/variants/details/delete/1" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this detail?');">
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                                <!-- Hiển thị tên Color -->
+                                                <td>${colorMap[color.colorId]}</td>
+
+                                                <td>
+                                                    <fmt:formatNumber value="${color.price}" pattern="#,##0.00" />
+                                                </td>
+                                                <td><fmt:formatNumber value="${color.sale}" pattern="#,##0.00" /></td>
+                                                <td>${color.quantity}</td>
+
+                                                <td>
+                                                    <form action="/products/${productId}/variants/${variantId}/details/update/${detailItem.id}" method="get" style="display:inline;">
+                                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                                    </form>
+                                                    <form action="/products/${productId}/variants/${variantId}/details/${detailItem.id}" method="get" style="display:inline;">
+                                                        <button type="submit" class="btn btn-info btn-sm">Detail</button>
+                                                    </form>
+                                                    <form action="/products/${productId}/variants/${variantId}/details/delete/${detailItem.id}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this detail?');">
+                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:forEach>
+                                </c:forEach>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </c:if>
 
             </div>
             <!-- /.container-fluid -->
@@ -175,7 +175,7 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<jsp:include page="../General/LogoutModal.jsp"/>
+<jsp:include page="../General/LogoutModal.jsp" />
 <script>
     // Wait until DOM is fully loaded
     document.addEventListener("DOMContentLoaded", function () {

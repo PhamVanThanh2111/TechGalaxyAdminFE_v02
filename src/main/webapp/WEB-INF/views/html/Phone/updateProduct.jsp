@@ -87,25 +87,22 @@
                             <div class="card-body">
                                 <!-- Form -->
                                 <form:form id="updateProductForm"
-                                           action="${pageContext.request.contextPath}/products/update/1"
+                                           action="${pageContext.request.contextPath}/products/update/${product.id}"
                                            method="POST"
+                                           modelAttribute="product"
                                            enctype="multipart/form-data">
+                                    <form:hidden path="id" />
                                     <div>
-                                            <input type="hidden" id="id" name="id" class="form-control" value="1" />
-                                    </div>
-                                    <div>
-                                            <label for="name" class="form-label font-weight-bold">Product Name</label>
-                                            <input type="text" id="name" name="name" class="form-control"/>
+                                        <label for="name" class="form-label font-weight-bold">Product Name</label>
+                                        <form:input path="name" id="name" class="form-control form-control-user" required="required" />
+                                        <form:errors path="name" cssClass="text-danger" />
                                     </div>
                                     <div class="mt-3">
-                                    <label for="trademark" class="form-label font-weight-bold">Trademark</label>
-                                    <select name="trademarkId" class="form-control" id="trademark">
-                                            <option value="1">Apple</option>
-                                            <option value="2">Samsung</option>
-                                            <option value="3">Xiaomi</option>
-                                            <option value="4">Oppo</option>
-                                            <option value="5">Vivo</option>
-                                        </select>
+                                        <label for="trademark" class="form-label font-weight-bold">Trademark</label>
+                                        <form:select path="trademarkId" class="form-control" id="trademark">
+                                            <form:options items="${trademarks}" itemValue="id" itemLabel="name" />
+                                        </form:select>
+                                        <form:errors path="trademarkId" cssClass="text-danger" />
                                     </div>
                                     <div class="mt-4">
                                         <button class="btn btn-primary btn-user btn-block" type="submit">Update</button>

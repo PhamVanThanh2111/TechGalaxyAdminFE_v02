@@ -55,7 +55,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-flex align-items-center mb-4">
-                    <a href="/products/1/variants" class="btn btn-outline-primary btn-lg me-3">
+                    <a href="/products/${productId}/variants" class="btn btn-outline-primary btn-lg me-3">
                         <i class="fas fa-arrow-left"></i> Back
                     </a>
                     <h1 class="h3 mb-0 text-gray-800">
@@ -118,12 +118,9 @@
                             <div class="form-group">
                                 <label for="usageCategoryId">Usage Category</label>
                                 <select class="form-control" id="usageCategoryId" name="usageCategoryId">
-<%--                                    <c:forEach items="${usageCategories}" var="usageCategory">--%>
-<%--                                        <option value="${usageCategory.id}">${usageCategory.name}</option>--%>
-<%--                                    </c:forEach>--%>
-                                    <option value="1">Gaming</option>
-                                    <option value="2">Business</option>
-                                    <option value="3">Casual</option>
+                                    <c:forEach items="${usageCategories}" var="usageCategory">
+                                        <option value="${usageCategory.id}">${usageCategory.name}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
 
