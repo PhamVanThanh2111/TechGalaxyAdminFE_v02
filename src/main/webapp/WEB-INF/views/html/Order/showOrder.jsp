@@ -129,245 +129,95 @@
                                 </tr>
                                 </tfoot>
                                 <tbody>
-<%--                                <c:if test="${orders != null}">--%>
-<%--                                    <c:forEach var="order" items="${orders}">--%>
-<%--                                        <!-- Dòng chính của bảng -->--%>
-<%--                                        <tr data-toggle="collapse" data-target="#collapse-${order.id}"--%>
-<%--                                            aria-expanded="false"--%>
-<%--                                            aria-controls="collapse-${order.id}" style="cursor: pointer;"--%>
-<%--                                            class="card-header">--%>
-<%--                                            <td>${order.customer.name}</td>--%>
-<%--                                            <td>${order.systemUser.name}</td>--%>
-<%--                                            <td>${order.address}</td>--%>
-<%--                                            <td>${order.paymentStatus}</td>--%>
-<%--                                            <td>${order.orderStatus}</td>--%>
-<%--                                            <td>--%>
-<%--                                                    &lt;%&ndash;                                                <c:if test="${order.orderStatus == 'NEW'}">&ndash;%&gt;--%>
-<%--                                                        <c:if test="${order.orderStatus == 'NEW' || order.orderStatus == 'PROCESSING'}">--%>
-<%--                                                            <a href="${pageContext.request.contextPath}/orders/update/${order.id}" class="btn btn-warning btn-sm">Update</a>--%>
-<%--                                                        </c:if>--%>
-<%--                                                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal"--%>
-<%--                                                   data-target="#confirmOrderModal_${order.id}">Edit Status</a>--%>
-<%--                                                <!-- Confirm Order Modal-->--%>
-<%--                                                <div class="modal fade" id="confirmOrderModal_${order.id}" tabindex="-1"--%>
-<%--                                                     role="dialog" aria-labelledby="confirmOrderModalLabel"--%>
-<%--                                                     aria-hidden="true">--%>
-<%--                                                    <div class="modal-dialog" role="document">--%>
-<%--                                                        <div class="modal-content">--%>
-<%--                                                            <div class="modal-header">--%>
-<%--                                                                <h5 class="modal-title" id="confirmOrderModalLabel">--%>
-<%--                                                                    Update the status of the order!</h5>--%>
-<%--                                                                <button class="close" type="button" data-dismiss="modal"--%>
-<%--                                                                        aria-label="Close">--%>
-<%--                                                                    <span aria-hidden="true">×</span>--%>
-<%--                                                                </button>--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="modal-body">Select the statuses below if you are--%>
-<%--                                                                sure that this order is in the appropriate status.--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="modal-footer">--%>
-<%--                                                                    &lt;%&ndash;                                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>&ndash;%&gt;--%>
-<%--                                                                <div class="text-center align-middle">--%>
-<%--                                                                    <a class="btn btn-success m-1"--%>
-<%--                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/NEW">NEW</a>--%>
-<%--                                                                    <a class="btn btn-secondary m-1"--%>
-<%--                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/PROCESSING">PROCESSING</a>--%>
-<%--                                                                    <a class="btn btn-info m-1"--%>
-<%--                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/SHIPPED">SHIPPED</a>--%>
-<%--                                                                    <a class="btn btn-primary m-1"--%>
-<%--                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/DELIVERED">DELIVERED</a>--%>
-<%--                                                                    <a class="btn btn-danger m-1"--%>
-<%--                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/CANCELLED">CANCELLED</a>--%>
-<%--                                                                    <a class="btn btn-warning m-1"--%>
-<%--                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/RETURNED">RETURNED</a>--%>
-<%--                                                                    <a class="btn btn-success m-1"--%>
-<%--                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/COMPLETED">COMPLETED</a>--%>
-<%--                                                                    <a class="btn btn-danger m-1"--%>
-<%--                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/OUT_FOR_DELIVERY">OUT_FOR_DELIVERY</a>--%>
-<%--                                                                </div>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                                    &lt;%&ndash;                                                </c:if>&ndash;%&gt;--%>
-<%--                                            </td>--%>
-<%--                                        </tr>--%>
+                                <c:if test="${orders != null}">
+                                    <c:forEach var="order" items="${orders}">
+                                        <!-- Dòng chính của bảng -->
+                                        <tr data-toggle="collapse" data-target="#collapse-${order.id}"
+                                            aria-expanded="false"
+                                            aria-controls="collapse-${order.id}" style="cursor: pointer;"
+                                            class="card-header">
+                                            <td>${order.customer.name}</td>
+                                            <td>${order.systemUser.name}</td>
+                                            <td>${order.address}</td>
+                                            <td>${order.paymentStatus}</td>
+                                            <td>${order.orderStatus}</td>
+                                            <td>
+                                                    <%--                                                <c:if test="${order.orderStatus == 'NEW'}">--%>
+                                                        <c:if test="${order.orderStatus == 'NEW' || order.orderStatus == 'PROCESSING'}">
+                                                            <a href="${pageContext.request.contextPath}/orders/update/${order.id}" class="btn btn-warning btn-sm">Update</a>
+                                                        </c:if>
+                                                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
+                                                   data-target="#confirmOrderModal_${order.id}">Edit Status</a>
+                                                <!-- Confirm Order Modal-->
+                                                <div class="modal fade" id="confirmOrderModal_${order.id}" tabindex="-1"
+                                                     role="dialog" aria-labelledby="confirmOrderModalLabel"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="confirmOrderModalLabel">
+                                                                    Update the status of the order!</h5>
+                                                                <button class="close" type="button" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">Select the statuses below if you are
+                                                                sure that this order is in the appropriate status.
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                    <%--                                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>--%>
+                                                                <div class="text-center align-middle">
+                                                                    <a class="btn btn-success m-1"
+                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/NEW">NEW</a>
+                                                                    <a class="btn btn-secondary m-1"
+                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/PROCESSING">PROCESSING</a>
+                                                                    <a class="btn btn-info m-1"
+                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/SHIPPED">SHIPPED</a>
+                                                                    <a class="btn btn-primary m-1"
+                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/DELIVERED">DELIVERED</a>
+                                                                    <a class="btn btn-danger m-1"
+                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/CANCELLED">CANCELLED</a>
+                                                                    <a class="btn btn-warning m-1"
+                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/RETURNED">RETURNED</a>
+                                                                    <a class="btn btn-success m-1"
+                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/COMPLETED">COMPLETED</a>
+                                                                    <a class="btn btn-danger m-1"
+                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/OUT_FOR_DELIVERY">OUT_FOR_DELIVERY</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <%--                                                </c:if>--%>
+                                            </td>
+                                        </tr>
 
-<%--                                        <!-- Dòng collapse hiển thị chi tiết -->--%>
-<%--                                        <tr class="collapse" id="collapse-${order.id}">--%>
-<%--                                            <td colspan="6">--%>
-<%--                                                <div class="p-3">--%>
-<%--                                                    <h6>Order Details:</h6>--%>
-<%--                                                    <ul>--%>
-<%--                                                        <c:if test="${order.orderDetails != null}">--%>
-<%--                                                            <c:forEach var="detail" items="${order.orderDetails}">--%>
-<%--                                                                <li>Name: ${detail.name}</li>--%>
-<%--                                                                <li>Quantity: ${detail.quantity}</li>--%>
-<%--                                                                <li class="mb-3">Price: <%--%>
-<%--                                                                    double price = ((OrderDetailResponse) pageContext.getAttribute("detail")).getPrice();--%>
-<%--                                                                    Locale vietnam = new Locale("vi", "VN");--%>
-<%--                                                                    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(vietnam);--%>
-<%--                                                                    String formattedPrice = currencyFormat.format(price);--%>
-<%--                                                                    out.print(formattedPrice);--%>
-<%--                                                                %></li>--%>
-<%--                                                            </c:forEach>--%>
-<%--                                                        </c:if>--%>
-<%--                                                    </ul>--%>
-<%--                                                </div>--%>
-<%--                                            </td>--%>
-<%--                                        </tr>--%>
-<%--                                    </c:forEach>--%>
-<%--                                </c:if>--%>
-<tr>
-    <td>Tiger Nixon</td>
-    <td>System Architect</td>
-    <td>Edinburgh</td>
-    <td>61</td>
-    <td>2011/04/25</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Garrett Winters</td>
-    <td>Accountant</td>
-    <td>Tokyo</td>
-    <td>63</td>
-    <td>2011/07/25</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Ashton Cox</td>
-    <td>Junior Technical Author</td>
-    <td>San Francisco</td>
-    <td>66</td>
-    <td>2009/01/12</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Cedric Kelly</td>
-    <td>Senior Javascript Developer</td>
-    <td>Edinburgh</td>
-    <td>22</td>
-    <td>2012/03/29</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Airi Satou</td>
-    <td>Accountant</td>
-    <td>Tokyo</td>
-    <td>33</td>
-    <td>2008/11/28</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Brielle Williamson</td>
-    <td>Integration Specialist</td>
-    <td>New York</td>
-    <td>61</td>
-    <td>2012/12/02</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Herrod Chandler</td>
-    <td>Sales Assistant</td>
-    <td>San Francisco</td>
-    <td>59</td>
-    <td>2012/08/06</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Rhona Davidson</td>
-    <td>Integration Specialist</td>
-    <td>Tokyo</td>
-    <td>55</td>
-    <td>2010/10/14</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Colleen Hurst</td>
-    <td>Javascript Developer</td>
-    <td>San Francisco</td>
-    <td>39</td>
-    <td>2009/09/15</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Sonya Frost</td>
-    <td>Software Engineer</td>
-    <td>Edinburgh</td>
-    <td>23</td>
-    <td>2008/12/13</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Jena Gaines</td>
-    <td>Office Manager</td>
-    <td>London</td>
-    <td>30</td>
-    <td>2008/12/19</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Quinn Flynn</td>
-    <td>Support Lead</td>
-    <td>Edinburgh</td>
-    <td>22</td>
-    <td>2013/03/03</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Charde Marshall</td>
-    <td>Regional Director</td>
-    <td>San Francisco</td>
-    <td>36</td>
-    <td>2008/10/16</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Haley Kennedy</td>
-    <td>Senior Marketing Designer</td>
-    <td>London</td>
-    <td>43</td>
-    <td>2012/12/18</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
-<tr>
-    <td>Tatyana Fitzpatrick</td>
-    <td>Regional Director</td>
-    <td>London</td>
-    <td>19</td>
-    <td>2010/03/17</td>
-    <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-
-    </td>
-</tr>
+                                        <!-- Dòng collapse hiển thị chi tiết -->
+                                        <tr class="collapse" id="collapse-${order.id}">
+                                            <td colspan="6">
+                                                <div class="p-3">
+                                                    <h6>Order Details:</h6>
+                                                    <ul>
+                                                        <c:if test="${order.orderDetails != null}">
+                                                            <c:forEach var="detail" items="${order.orderDetails}">
+                                                                <li>Name: ${detail.name}</li>
+                                                                <li>Quantity: ${detail.quantity}</li>
+                                                                <li class="mb-3">Price: <%
+                                                                    double price = ((OrderDetailResponse) pageContext.getAttribute("detail")).getPrice();
+                                                                    Locale vietnam = new Locale("vi", "VN");
+                                                                    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(vietnam);
+                                                                    String formattedPrice = currencyFormat.format(price);
+                                                                    out.print(formattedPrice);
+                                                                %></li>
+                                                            </c:forEach>
+                                                        </c:if>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:if>
                                 </tbody>
                             </table>
                         </div>

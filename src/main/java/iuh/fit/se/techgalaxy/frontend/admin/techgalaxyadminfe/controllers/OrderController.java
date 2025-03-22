@@ -67,7 +67,8 @@ public class OrderController {
         }
         try {
             DataResponse<OrderResponse> response = orderService.getAll(accessToken);
-            List<OrderResponse> orders = getOrderResponses(response, accessToken);
+            List<OrderResponse> orders = (List<OrderResponse>) response.getData();
+
             model.setViewName("html/Order/showOrder");
             model.addObject("orders", orders);
             return model;
