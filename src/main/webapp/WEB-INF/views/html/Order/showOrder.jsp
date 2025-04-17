@@ -17,8 +17,10 @@
     <link rel="icon" href="<c:url value='/images/favicon/favicon.ico' />">
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/images/favicon/favicon-16x16.png' />">
     <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/favicon/favicon-32x32.png' />">
-    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
-    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
+    <link rel="icon" type="image/png" sizes="512x512"
+          href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
     <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/favicon/apple-touch-icon.png' />">
     <link rel="manifest" href="<c:url value='/images/favicon/site.webmanifest' />">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -142,54 +144,10 @@
                                             <td>${order.paymentStatus}</td>
                                             <td>${order.orderStatus}</td>
                                             <td>
-                                                    <%--                                                <c:if test="${order.orderStatus == 'NEW'}">--%>
-                                                        <c:if test="${order.orderStatus == 'NEW' || order.orderStatus == 'PROCESSING'}">
-                                                            <a href="${pageContext.request.contextPath}/orders/update/${order.id}" class="btn btn-warning btn-sm">Update</a>
-                                                        </c:if>
-                                                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal"
-                                                   data-target="#confirmOrderModal_${order.id}">Edit Status</a>
-                                                <!-- Confirm Order Modal-->
-                                                <div class="modal fade" id="confirmOrderModal_${order.id}" tabindex="-1"
-                                                     role="dialog" aria-labelledby="confirmOrderModalLabel"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="confirmOrderModalLabel">
-                                                                    Update the status of the order!</h5>
-                                                                <button class="close" type="button" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">×</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">Select the statuses below if you are
-                                                                sure that this order is in the appropriate status.
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                    <%--                                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>--%>
-                                                                <div class="text-center align-middle">
-                                                                    <a class="btn btn-success m-1"
-                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/NEW">NEW</a>
-                                                                    <a class="btn btn-secondary m-1"
-                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/PROCESSING">PROCESSING</a>
-                                                                    <a class="btn btn-info m-1"
-                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/SHIPPED">SHIPPED</a>
-                                                                    <a class="btn btn-primary m-1"
-                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/DELIVERED">DELIVERED</a>
-                                                                    <a class="btn btn-danger m-1"
-                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/CANCELLED">CANCELLED</a>
-                                                                    <a class="btn btn-warning m-1"
-                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/RETURNED">RETURNED</a>
-                                                                    <a class="btn btn-success m-1"
-                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/COMPLETED">COMPLETED</a>
-                                                                    <a class="btn btn-danger m-1"
-                                                                       href="${pageContext.request.contextPath}/orders/confirm/${order.id}/OUT_FOR_DELIVERY">OUT_FOR_DELIVERY</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                    <%--                                                </c:if>--%>
+                                                <c:if test="${order.orderStatus != 'COMPLETED'}">
+                                                    <a href="${pageContext.request.contextPath}/orders/update/${order.id}"
+                                                       class="btn btn-warning btn-sm">Update</a>
+                                                </c:if>
                                             </td>
                                         </tr>
 

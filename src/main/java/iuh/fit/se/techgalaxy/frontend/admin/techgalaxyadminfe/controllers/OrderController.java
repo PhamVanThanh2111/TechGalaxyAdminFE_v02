@@ -258,12 +258,9 @@ public class OrderController {
             switch (orderStatus) {
                 case "NEW" -> order.setOrderStatus(OrderStatus.NEW);
                 case "PROCESSING" -> order.setOrderStatus(OrderStatus.PROCESSING);
-                case "SHIPPED" -> order.setOrderStatus(OrderStatus.SHIPPED);
-                case "DELIVERED" -> order.setOrderStatus(OrderStatus.DELIVERED);
                 case "CANCELLED" -> order.setOrderStatus(OrderStatus.CANCELLED);
-                case "RETURNED" -> order.setOrderStatus(OrderStatus.RETURNED);
                 case "COMPLETED" -> order.setOrderStatus(OrderStatus.COMPLETED);
-                case "OUT_FOR_DELIVERY" -> order.setOrderStatus(OrderStatus.OUT_FOR_DELIVERY);
+                case "CONFIRMED" -> order.setOrderStatus(OrderStatus.CONFIRMED);
             }
 
             Order orderUpdate = OrderMapper.INSTANCE.toOrderFromResponse(order);
@@ -300,42 +297,13 @@ public class OrderController {
             return model;
         }
         try {
-            List<ProductVariantResponse> productVariants = (List<ProductVariantResponse>) productService.getAllVariants().getData();
-            productVariants.forEach(productVariant -> {
-                List<ProductVariantDetailResponse> productVariantDetails = (List<ProductVariantDetailResponse>) productService.getAllVariantDetailsByVariantId(productVariant.getId()).getData();
-                productVariant.setProductVariantDetails(productVariantDetails);
-            });
-
-            List<Memory> memories = (List<Memory>) memoryService.getAllMemories().getData();
-            List<Color> colors = (List<Color>) colorService.getAllColors().getData();
-
             OrderResponse order = ((List<OrderResponse>) orderService.getById(id, accessToken).getData()).get(0);
-            order.setId(id);
-            List<OrderDetailResponse> orderDetails = (List<OrderDetailResponse>) orderDetailService.getOrderDetail(id, accessToken).getData();
-            orderDetails.forEach(orderDetail -> {
-                ProductDetailResponse productVariantDetail = ((List<ProductDetailResponse>) productService.getVariantDetailById(orderDetail.getProductVariantDetail().getId()).getData()).get(0);
-                String productVariantName = ((List<ProductVariantResponse>) productService.findProductVariantByProductVariantDetailId(orderDetail.getProductVariantDetail().getId()).getData()).get(0).getName();
-                orderDetail.setName(productVariantName);
-                orderDetail.getProductVariantDetail().setColor(productVariantDetail.getColor());
-                orderDetail.getProductVariantDetail().setMemory(productVariantDetail.getMemory());
-            });
-
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                    .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-                    .create();
-
-            model.addObject("productVariants", gson.toJson(productVariants));
-            model.addObject("memories", gson.toJson(memories));
-            model.addObject("colors", gson.toJson(colors));
+            System.out.println(order.getId());
+            System.out.println(order.getAddress());
+            System.out.println(order.getOrderStatus());
+            System.out.println(order.getPaymentStatus());
+            System.out.println(order.getPaymentMethod());
             model.addObject("order", order);
-            model.addObject("orderDetails", gson.toJson(orderDetails));
-            System.out.println("Order details");
-            System.out.println(order.getCustomer().getAccount().getEmail());
-            System.out.println(gson.toJson(productVariants));
-            System.out.println(gson.toJson(memories));
-            System.out.println(gson.toJson(colors));
-            System.out.println(gson.toJson(orderDetails));
             model.setViewName("html/Order/updateOrder");
             return model;
         } catch (

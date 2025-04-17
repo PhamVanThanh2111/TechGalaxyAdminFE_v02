@@ -1,6 +1,7 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response;
 
 import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.OrderStatus;
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.PaymentMethod;
 import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.PaymentStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,5 +20,6 @@ public class OrderResponse {
     String address;
     PaymentStatus paymentStatus;
     OrderStatus orderStatus;
+    PaymentMethod paymentMethod;
     List<OrderDetailResponse> orderDetails;
 }

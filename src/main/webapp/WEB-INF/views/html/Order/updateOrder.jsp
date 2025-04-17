@@ -16,8 +16,10 @@
     <link rel="icon" href="<c:url value='/images/favicon/favicon.ico' />">
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/images/favicon/favicon-16x16.png' />">
     <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/favicon/favicon-32x32.png' />">
-    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
-    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
+    <link rel="icon" type="image/png" sizes="512x512"
+          href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
     <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/favicon/apple-touch-icon.png' />">
     <link rel="manifest" href="<c:url value='/images/favicon/site.webmanifest' />">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -93,10 +95,10 @@
                                         <div class="collapse show" id="collapseCardCustomer">
                                             <div class="card-body">
                                                 <div class="form-group">
-                                                    <form:label path="customer.account.email"
-                                                                for="email">Email</form:label>
-                                                    <form:input path="customer.account.email" type="email"
-                                                                placeholder="E-mail" id="email" name="email"
+                                                    <form:label path="address"
+                                                                for="address">Address</form:label>
+                                                    <form:input path="address"
+                                                                placeholder="Address" id="address" name="address"
                                                                 class="form-control" required="required"/>
                                                 </div>
                                             </div>
@@ -108,7 +110,7 @@
                                         <a href="#collapseCardOrder" class="d-block card-header py-3"
                                            data-toggle="collapse"
                                            role="button" aria-expanded="true" aria-controls="collapseCardOrder">
-                                            <h6 class="m-0 font-weight-bold text-primary">Order Information</h6>
+                                            <h6 class="m-0 font-weight-bold text-primary">General Information</h6>
                                         </a>
 
                                         <div class="collapse show" id="collapseCardOrder">
@@ -116,11 +118,42 @@
                                                 <div id="productCards" class="row"></div>
 
                                                 <div class="form-group mt-2">
-                                                    <form:label path="address"
-                                                                for="address">Delivery address</form:label>
-                                                    <form:input path="address" name="address" class="form-control"
-                                                                id="address"
-                                                                placeholder="Delivery address" required="required"/>
+                                                    <form:label path="orderStatus"
+                                                                for="orderStatus">Order status</form:label>
+                                                    <form:select path="orderStatus" name="orderStatus" class="form-control"
+                                                                id="orderStatus"
+                                                                required="required">
+                                                        <form:option value="NEW" label="NEW"/>
+                                                        <form:option value="PROCESSING" label="PROCESSING"/>
+                                                        <form:option value="CANCELLED" label="CANCELLED"/>
+                                                        <form:option value="COMPLETED" label="COMPLETED"/>
+                                                        <form:option value="CONFIRMED" label="CONFIRMED"/>
+                                                    </form:select>
+                                                </div>
+                                                <div class="form-group mt-2">
+                                                    <form:label path="paymentStatus"
+                                                                for="paymentStatus">Payment status</form:label>
+                                                    <form:select path="paymentStatus" name="paymentStatus" class="form-control"
+                                                                 id="paymentStatus"
+                                                                 required="required">
+                                                        <form:option value="PENDING" label="PENDING"/>
+                                                        <form:option value="PAID" label="PAID"/>
+                                                        <form:option value="FAILED" label="FAILED"/>
+                                                        <form:option value="REFUNDED" label="REFUNDED"/>
+                                                        <form:option value="CANCELLED" label="CANCELLED"/>
+                                                        <form:option value="WAITING" label="WAITING"/>
+                                                    </form:select>
+                                                </div>
+                                                <div class="form-group mt-2">
+                                                    <form:label path="paymentMethod"
+                                                                for="paymentMethod">Payment method</form:label>
+                                                    <form:select path="paymentMethod" name="paymentMethod" class="form-control"
+                                                                 id="paymentMethod"
+                                                                 required="required">
+                                                        <form:option value="COD" label="COD"/>
+                                                        <form:option value="VNPAY" label="VNPAY"/>
+
+                                                    </form:select>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,14 +197,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<c:url value="/js/sb-admin-2.min.js" />"></script>
-
-<script>
-    const productVariants = ${productVariants};
-    const memories = ${memories};
-    const colors = ${colors};
-    const orderDetails = ${orderDetails};
-</script>
-<script src="<c:url value="/js/updateProduct_Order.js" />"></script>
 
 </body>
 
