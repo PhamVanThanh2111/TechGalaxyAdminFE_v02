@@ -320,7 +320,6 @@ public class OrderController {
                 orderDetail.getProductVariantDetail().setMemory(productVariantDetail.getMemory());
             });
 
-
             Gson gson = new GsonBuilder()
                     .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                     .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
