@@ -130,173 +130,70 @@
                                 </tr>
                                 </tfoot>
                                 <tbody>
-<%--                                <c:if test="${sys_users != null}">--%>
-<%--                                    <c:forEach items="${sys_users}" var="sys_user">--%>
-<%--                                        <tr>--%>
-<%--                                            <td>${sys_user.name}</td>--%>
-<%--                                            <td>${sys_user.phone}</td>--%>
-<%--                                            <td>${sys_user.gender}</td>--%>
-<%--                                            <td>${sys_user.address}</td>--%>
-<%--                                            <td>${sys_user.systemUserStatus}</td>--%>
-<%--                                            <td>${sys_user.level}</td>--%>
-<%--                                            <td>--%>
-<%--                                                <c:if test="${sys_user.avatar != null}">--%>
-<%--                                                    <img src="<c:url value="http://localhost:8081/storage/systemUser/avatar/${sys_user.avatar}"/>"--%>
-<%--                                                         alt="avatar"--%>
-<%--                                                         width="55" height="55">--%>
-<%--                                                </c:if>--%>
-<%--                                                <c:if test="${sys_user.avatar == null}">--%>
-<%--                                                    <img src="<c:url value='${sys_user.gender == "FEMALE" ? "/img/undraw_profile_1.svg" : "/img/undraw_profile.svg"}' />"--%>
-<%--                                                         alt="avatar"--%>
-<%--                                                         width="55" height="55">--%>
-<%--                                                </c:if>--%>
-<%--                                            </td>--%>
-<%--                                            <td style="width: 18%">--%>
-<%--                                                <a--%>
-<%--                                                        href="${pageContext.request.contextPath}/systemUsers/update/${sys_user.id}"--%>
-<%--                                                        class="btn btn-warning btn-sm">Update</a>--%>
-<%--                                                <a href="${pageContext.request.contextPath}/systemUsers/delete/${sys_user.id}"--%>
-<%--                                                   class="btn btn-danger btn-sm" data-toggle="modal"--%>
-<%--                                                   data-target="#deleteUserModal_${sys_user.id}">Delete</a>--%>
-<%--                                                <a href="${pageContext.request.contextPath}/systemUsers/detail/${sys_user.id}"--%>
-<%--                                                   class="btn btn-info btn-sm">Detail</a>--%>
+                                <c:if test="${sys_users != null}">
+                                    <c:forEach items="${sys_users}" var="sys_user">
+                                        <tr>
+                                            <td class="align-middle">${sys_user.name}</td>
+                                            <td class="align-middle">${sys_user.phone}</td>
+                                            <td class="align-middle">${sys_user.gender}</td>
+                                            <td class="align-middle">${sys_user.address}</td>
+                                            <td class="align-middle">${sys_user.systemUserStatus}</td>
+                                            <td class="align-middle">${sys_user.level}</td>
+                                            <td class="align-middle">
+                                                <c:if test="${sys_user.avatar != null}">
+                                                    <img src="<c:url value="http://localhost:8081/storage/systemUser/avatar/${sys_user.avatar}"/>"
+                                                         alt="avatar"
+                                                         width="55" height="55">
+                                                </c:if>
+                                                <c:if test="${sys_user.avatar == null}">
+                                                    <img src="<c:url value='${sys_user.gender == "FEMALE" ? "/img/undraw_profile_1.svg" : "/img/undraw_profile.svg"}' />"
+                                                         alt="avatar"
+                                                         width="55" height="55">
+                                                </c:if>
+                                            </td>
+                                            <td style="width: 18%" class="align-middle">
+                                                <a
+                                                        href="${pageContext.request.contextPath}/systemUsers/update/${sys_user.id}"
+                                                        class="btn btn-warning btn-sm">Update</a>
+                                                <a href="${pageContext.request.contextPath}/systemUsers/delete/${sys_user.id}"
+                                                   class="btn btn-danger btn-sm" data-toggle="modal"
+                                                   data-target="#deleteUserModal_${sys_user.id}">Delete</a>
+                                                <a href="${pageContext.request.contextPath}/systemUsers/detail/${sys_user.id}"
+                                                   class="btn btn-info btn-sm">Detail</a>
 
 
-<%--                                                <!-- Delete User Modal-->--%>
-<%--                                                <div class="modal fade" id="deleteUserModal_${sys_user.id}"--%>
-<%--                                                     tabindex="-1" role="dialog" aria-labelledby="deleteLabel"--%>
-<%--                                                     aria-hidden="true">--%>
-<%--                                                    <div class="modal-dialog" role="document">--%>
-<%--                                                        <div class="modal-content">--%>
-<%--                                                            <div class="modal-header">--%>
-<%--                                                                <h5 class="modal-title" id="deleteLabel">Ready to--%>
-<%--                                                                    delete?</h5>--%>
-<%--                                                                <button class="close" type="button" data-dismiss="modal"--%>
-<%--                                                                        aria-label="Close">--%>
-<%--                                                                    <span aria-hidden="true">×</span>--%>
-<%--                                                                </button>--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="modal-body">Select "Yes" below if you are ready--%>
-<%--                                                                to delete this user.--%>
-<%--                                                            </div>--%>
-<%--                                                            <div class="modal-footer">--%>
-<%--                                                                <button class="btn btn-secondary" type="button"--%>
-<%--                                                                        data-dismiss="modal">Cancel--%>
-<%--                                                                </button>--%>
-<%--                                                                <a class="btn btn-primary"--%>
-<%--                                                                   href="${pageContext.request.contextPath}/systemUsers/delete/${sys_user.id}">Yes</a>--%>
-<%--                                                            </div>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </td>--%>
-<%--                                        </tr>--%>
-<%--                                    </c:forEach>--%>
-<%--                                </c:if>--%>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                        <td>$327,900</td>
-                                        <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModal">Delete</a>
-                                            <a href="${pageContext.request.contextPath}/systemUsers/detail/1" class="btn btn-info btn-sm">Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                        <td>$327,900</td>
-                                        <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModal">Delete</a>
-                                            <a href="${pageContext.request.contextPath}/systemUsers/detail/1" class="btn btn-info btn-sm">Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                        <td>$327,900</td>
-                                        <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModal">Delete</a>
-                                            <a href="${pageContext.request.contextPath}/systemUsers/detail/1" class="btn btn-info btn-sm">Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                        <td>$327,900</td>
-                                        <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModal">Delete</a>
-                                            <a href="${pageContext.request.contextPath}/systemUsers/detail/1" class="btn btn-info btn-sm">Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Airi Satou</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>33</td>
-                                        <td>2008/11/28</td>
-                                        <td>$162,700</td>
-                                        <td>$327,900</td>
-                                        <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModal">Delete</a>
-                                            <a href="${pageContext.request.contextPath}/systemUsers/detail/1" class="btn btn-info btn-sm">Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brielle Williamson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>New York</td>
-                                        <td>61</td>
-                                        <td>2012/12/02</td>
-                                        <td>$372,000</td>
-                                        <td>$327,900</td>
-                                        <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModal">Delete</a>
-                                            <a href="${pageContext.request.contextPath}/systemUsers/detail/1" class="btn btn-info btn-sm">Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Herrod Chandler</td>
-                                        <td>Sales Assistant</td>
-                                        <td>San Francisco</td>
-                                        <td>59</td>
-                                        <td>2012/08/06</td>
-                                        <td>$137,500</td>
-                                        <td>$327,900</td>
-                                        <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModal">Delete</a>
-                                            <a href="${pageContext.request.contextPath}/systemUsers/detail/1" class="btn btn-info btn-sm">Detail</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rhona Davidson</td>
-                                        <td>Integration Specialist</td>
-                                        <td>Tokyo</td>
-                                        <td>55</td>
-                                        <td>2010/10/14</td>
-                                        <td>$327,900</td>
-                                        <td>$327,900</td>
-                                        <td><a href="updateUser.html" class="btn btn-warning btn-sm">Update</a>
-                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUserModal">Delete</a>
-                                            <a href="${pageContext.request.contextPath}/systemUsers/detail/1" class="btn btn-info btn-sm">Detail</a>
-                                        </td>
-                                    </tr>
+                                                <!-- Delete User Modal-->
+                                                <div class="modal fade" id="deleteUserModal_${sys_user.id}"
+                                                     tabindex="-1" role="dialog" aria-labelledby="deleteLabel"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="deleteLabel">Ready to
+                                                                    delete?</h5>
+                                                                <button class="close" type="button" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">Select "Yes" below if you are ready
+                                                                to delete this user.
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-secondary" type="button"
+                                                                        data-dismiss="modal">Cancel
+                                                                </button>
+                                                                <a class="btn btn-primary"
+                                                                   href="${pageContext.request.contextPath}/systemUsers/delete/${sys_user.id}">Yes</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:if>
+
                                 </tbody>
                             </table>
                         </div>
