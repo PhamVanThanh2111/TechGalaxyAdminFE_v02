@@ -135,93 +135,112 @@ public class OrderController {
                                   ModelAndView model,
                                   HttpSession session,
                                   RedirectAttributes redirectAttributes) {
+        System.out.println(orderRequest.getId());
         String accessToken = (String) session.getAttribute("accessToken");
         if (accessToken == null) {
             model.setViewName("redirect:/login");
             return model;
         }
         try {
-            // Customer
-            if (accountService.existsByEmail(orderRequest.getCustomer().getAccount().getEmail(), accessToken)) { // co customer trong dbs
-                CustomerResponse customerFindByEmail = ((List<CustomerResponse>) customerService.findByEmail(orderRequest.getCustomer().getAccount().getEmail(), accessToken).getData()).get(0);
-                orderRequest.setCustomer(customerFindByEmail);
-            } else {
-                CustomerRequest customerRequest = new CustomerRequest();
-                customerRequest.setUserStatus(CustomerStatus.ACTIVE);
-                customerRequest.setAccount(orderRequest.getCustomer().getAccount());
-                customerRequest.setName("unknown");
-                CustomerResponse customerResponse = ((List<CustomerResponse>) customerService.save(customerRequest, accessToken).getData()).get(0);
-                orderRequest.setCustomer(customerResponse);
+            if (source.equals("updateOrder")){
+//                System.out.println("test");
+//                System.out.println(orderRequest.getId());
+//                System.out.println(orderRequest.getAddress());
+//                System.out.println(orderRequest.getOrderStatus());
+//                System.out.println(orderRequest.getPaymentStatus());
+//                System.out.println(orderRequest.getPaymentMethod());
+//                System.out.println(orderRequest.getCustomer().getId());
+//                System.out.println(orderRequest.getSystemUser().getId());
+                OrderResponse order = ((List<OrderResponse>) orderService.getById(orderRequest.getId(), accessToken).getData()).get(0);
+                orderRequest.setCustomer(order.getCustomer());
+                orderRequest.setSystemUser(order.getSystemUser());
+                orderService.update(orderRequest, accessToken);
+                model.setViewName("redirect:/orders");
+                return model;
             }
-
-            // SystemUser
-            SystemUserResponse systemUser = new SystemUserResponse();
-            SystemUserResponseDTO systemUserLogin = authService.getSystemUserLogin(accessToken);
-            systemUser.setId(systemUserLogin.getId());
-            orderRequest.setSystemUser(systemUser);
-
-            // Save order
-            OrderResponse orderResponse;
-            if (source.equals("addOrder")) {
-                // Address
-                String address = orderRequest.getAddress();
-                orderRequest.setAddress(address);
-
-                // Payment status
-                orderRequest.setPaymentStatus(PaymentStatus.PENDING);
-
-                // Order status
-                orderRequest.setOrderStatus(OrderStatus.NEW);
-                orderResponse = ((List<OrderResponse>) orderService.create(orderRequest, accessToken).getData()).get(0);
-            } else {
-                orderResponse = ((List<OrderResponse>) orderService.update(orderRequest, accessToken).getData()).get(0);
-            }
-
-            // Save order detail
-            OrderDetailRequest orderDetailRequest = new OrderDetailRequest();
-            for (int i = 1; i <= productCount; i++) {
-                String productVariantId = params.get("productName[" + i + "]");
-                int quantity = Integer.parseInt(params.get("quantity[" + i + "]"));
-                String memoryId = params.get("memory[" + i + "]");
-                String colorId = params.get("color[" + i + "]");
-                double price = Double.parseDouble(params.get("price[" + i + "]").replaceAll(",", ""));
-
-                ProductVariantResponse productVariant = new ProductVariantResponse();
-                productVariant.setId(productVariantId);
-
-                ProductVariantDetailResponse productVariantDetail = new ProductVariantDetailResponse();
-                productVariantDetail.setId(productVariantId);
-
-
-                OrderDetailResponse orderDetailResponse;
-                if (source.equals("addOrder")) {
-                    ProductDetailResponse response = ((List<ProductDetailResponse>) productService.findProductVariantDetailByProductVariantAndColorAndMemory(productVariantId, colorId, memoryId).getData()).get(0);
-                    productVariantDetail.setId(response.getId());
-
-                    orderDetailRequest.setDetailStatus(DetailStatus.PENDING);
-                    orderDetailRequest.setOrder(orderResponse);
-                    orderDetailRequest.setProductVariantDetail(productVariantDetail);
-                    orderDetailRequest.setQuantity(quantity);
-                    orderDetailRequest.setPrice(price / quantity);
-                    orderDetailResponse = ((List<OrderDetailResponse>) orderDetailService.createOrderDetail(orderDetailRequest, accessToken).getData()).get(0);
+            else {
+                // Customer
+                if (accountService.existsByEmail(orderRequest.getCustomer().getAccount().getEmail(), accessToken)) { // co customer trong dbs
+                    CustomerResponse customerFindByEmail = ((List<CustomerResponse>) customerService.findByEmail(orderRequest.getCustomer().getAccount().getEmail(), accessToken).getData()).get(0);
+                    orderRequest.setCustomer(customerFindByEmail);
                 } else {
-                    orderDetailResponse = ((List<OrderDetailResponse>) orderDetailService.getOrderDetailByOrderIdAndProductVariantDetailId(orderResponse.getId(), productVariantDetail.getId(), accessToken).getData()).get(0);
-                    orderDetailResponse.setQuantity(quantity);
-                    orderDetailResponse.setPrice(price);
+                    CustomerRequest customerRequest = new CustomerRequest();
+                    customerRequest.setUserStatus(CustomerStatus.ACTIVE);
+                    customerRequest.setAccount(orderRequest.getCustomer().getAccount());
+                    customerRequest.setName("unknown");
+                    CustomerResponse customerResponse = ((List<CustomerResponse>) customerService.save(customerRequest, accessToken).getData()).get(0);
+                    orderRequest.setCustomer(customerResponse);
+                }
 
-                    OrderDetail orderDetailUpdate = OrderDetailMapper.INSTANCE.toOrderDetailFromResponse(orderDetailResponse);
-                    orderDetailService.updateOrderDetail(orderDetailResponse.getId(), OrderDetailMapper.INSTANCE.toOrderDetailRequest(orderDetailUpdate), accessToken);
-                    System.out.println("update thanh cong");
+                // SystemUser
+                SystemUserResponse systemUser = new SystemUserResponse();
+                SystemUserResponseDTO systemUserLogin = authService.getSystemUserLogin(accessToken);
+                systemUser.setId(systemUserLogin.getId());
+                orderRequest.setSystemUser(systemUser);
+
+                // Save order
+                OrderResponse orderResponse;
+                if (source.equals("addOrder")) {
+                    // Address
+                    String address = orderRequest.getAddress();
+                    orderRequest.setAddress(address);
+
+                    // Payment status
+                    orderRequest.setPaymentStatus(PaymentStatus.PENDING);
+
+                    // Order status
+                    orderRequest.setOrderStatus(OrderStatus.NEW);
+                    orderResponse = ((List<OrderResponse>) orderService.create(orderRequest, accessToken).getData()).get(0);
+                } else {
+                    orderResponse = ((List<OrderResponse>) orderService.update(orderRequest, accessToken).getData()).get(0);
                 }
-                if (orderDetailResponse == null) {
-                    model.setViewName("html/Order/addOrder");
-                    redirectAttributes.addFlashAttribute("errorMessage", "Order save failed");
-                    return model;
+
+                // Save order detail
+                OrderDetailRequest orderDetailRequest = new OrderDetailRequest();
+                for (int i = 1; i <= productCount; i++) {
+                    String productVariantId = params.get("productName[" + i + "]");
+                    int quantity = Integer.parseInt(params.get("quantity[" + i + "]"));
+                    String memoryId = params.get("memory[" + i + "]");
+                    String colorId = params.get("color[" + i + "]");
+                    double price = Double.parseDouble(params.get("price[" + i + "]").replaceAll(",", ""));
+
+                    ProductVariantResponse productVariant = new ProductVariantResponse();
+                    productVariant.setId(productVariantId);
+
+                    ProductVariantDetailResponse productVariantDetail = new ProductVariantDetailResponse();
+                    productVariantDetail.setId(productVariantId);
+
+
+                    OrderDetailResponse orderDetailResponse;
+                    if (source.equals("addOrder")) {
+                        ProductDetailResponse response = ((List<ProductDetailResponse>) productService.findProductVariantDetailByProductVariantAndColorAndMemory(productVariantId, colorId, memoryId).getData()).get(0);
+                        productVariantDetail.setId(response.getId());
+
+                        orderDetailRequest.setDetailStatus(DetailStatus.PENDING);
+                        orderDetailRequest.setOrder(orderResponse);
+                        orderDetailRequest.setProductVariantDetail(productVariantDetail);
+                        orderDetailRequest.setQuantity(quantity);
+                        orderDetailRequest.setPrice(price / quantity);
+                        orderDetailResponse = ((List<OrderDetailResponse>) orderDetailService.createOrderDetail(orderDetailRequest, accessToken).getData()).get(0);
+                    } else {
+                        orderDetailResponse = ((List<OrderDetailResponse>) orderDetailService.getOrderDetailByOrderIdAndProductVariantDetailId(orderResponse.getId(), productVariantDetail.getId(), accessToken).getData()).get(0);
+                        orderDetailResponse.setQuantity(quantity);
+                        orderDetailResponse.setPrice(price);
+
+                        OrderDetail orderDetailUpdate = OrderDetailMapper.INSTANCE.toOrderDetailFromResponse(orderDetailResponse);
+                        orderDetailService.updateOrderDetail(orderDetailResponse.getId(), OrderDetailMapper.INSTANCE.toOrderDetailRequest(orderDetailUpdate), accessToken);
+                        System.out.println("update thanh cong");
+                    }
+                    if (orderDetailResponse == null) {
+                        model.setViewName("html/Order/addOrder");
+                        redirectAttributes.addFlashAttribute("errorMessage", "Order save failed");
+                        return model;
+                    }
                 }
+                model.setViewName("redirect:/orders");
+                redirectAttributes.addFlashAttribute("successMessage", "Order save successfully");
+                return model;
             }
-            model.setViewName("redirect:/orders");
-            redirectAttributes.addFlashAttribute("successMessage", "Order save successfully");
-            return model;
         } catch (
                 HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
