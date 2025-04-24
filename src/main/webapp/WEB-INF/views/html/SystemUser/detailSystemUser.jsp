@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page import="iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.entities.enumeration.Gender" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +15,10 @@
     <link rel="icon" href="<c:url value='/images/favicon/favicon.ico' />">
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/images/favicon/favicon-16x16.png' />">
     <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/favicon/favicon-32x32.png' />">
-    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
-    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
+    <link rel="icon" type="image/png" sizes="512x512"
+          href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
     <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/favicon/apple-touch-icon.png' />">
     <link rel="manifest" href="<c:url value='/images/favicon/site.webmanifest' />">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -43,7 +46,7 @@
 <div id="wrapper">
 
     <!--    Sidebar -->
-    <jsp:include page="../General/Sidebar.jsp" />
+    <jsp:include page="../General/Sidebar.jsp"/>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -53,7 +56,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <jsp:include page="../General/Topbar.jsp" />
+            <jsp:include page="../General/Topbar.jsp"/>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -77,18 +80,19 @@
 
                                 <!-- Profile Picture -->
                                 <div class="mb-3 text-center">
-                                    <img src="<c:url value='${"/img/undraw_profile_1.svg"}' />"
-                                         alt="avatar"
-                                         class="img-thumbnail" style="width: 200px; height: 200px; border-width: 0; border-radius: 50%;">
-<%--                                    <c:if test="${systemUser.avatar != null}">--%>
-<%--                                        <img src="<c:url value="http://localhost:8081/storage/systemUser/avatar/${systemUser.avatar}"/>" alt="avatar"--%>
-<%--                                             class="img-thumbnail" style="width: 200px; height: 200px; border-width: 0; border-radius: 50%;">--%>
-<%--                                    </c:if>--%>
-<%--                                    <c:if test="${systemUser.avatar == null}">--%>
-<%--                                        <img src="<c:url value='${systemUser.gender == "FEMALE" ? "/img/undraw_profile_1.svg" : "/img/undraw_profile.svg"}' />"--%>
-<%--                                             alt="avatar"--%>
-<%--                                             class="img-thumbnail" style="width: 200px; height: 200px; border-width: 0; border-radius: 50%;">--%>
-<%--                                    </c:if>--%>
+                                    <c:if test="${systemUser.gender == Gender.MALE}">
+                                        <img src="<c:url value='${"/img/undraw_profile.svg"}' />"
+                                             alt="avatar"
+                                             class="img-thumbnail"
+                                             style="width: 200px; height: 200px; border-width: 0; border-radius: 50%;">
+                                    </c:if>
+                                    <c:if test="${systemUser.gender == Gender.FEMALE}">
+                                        <img src="<c:url value='${"/img/undraw_profile_1.svg"}' />"
+                                             alt="avatar"
+                                             class="img-thumbnail"
+                                             style="width: 200px; height: 200px; border-width: 0; border-radius: 50%;">
+
+                                    </c:if>
                                 </div>
 
                                 <!-- User General Information -->
@@ -99,19 +103,19 @@
                                             ${systemUser.name}
                                         </li>
                                         <li class="list-group-item">
-<%--                                            <strong>Email:</strong> ${systemUser.account.email}--%>
+                                            <%--                                            <strong>Email:</strong> ${systemUser.account.email}--%>
                                             <strong>Email:</strong> phamtrung21112003@gmail.com
                                         </li>
                                         <li class="list-group-item">
-<%--                                            <strong>Phone Number:</strong> ${systemUser.phone}--%>
+                                            <%--                                            <strong>Phone Number:</strong> ${systemUser.phone}--%>
                                             <strong>Phone Number:</strong> 0934004524
                                         </li>
                                         <li class="list-group-item">
-<%--                                            <strong>Address:</strong> ${systemUser.address}--%>
+                                            <%--                                            <strong>Address:</strong> ${systemUser.address}--%>
                                             <strong>Address:</strong> Binh Tan
                                         </li>
                                         <li class="list-group-item">
-<%--                                            <strong>Gender:</strong> ${systemUser.gender}--%>
+                                            <%--                                            <strong>Gender:</strong> ${systemUser.gender}--%>
                                             <strong>Gender:</strong> MALE
                                         </li>
                                     </ul>
@@ -130,12 +134,12 @@
                                         <tbody>
                                         <tr>
                                             <td>Level</td>
-<%--                                            <td>${systemUser.level}</td>--%>
+                                            <%--                                            <td>${systemUser.level}</td>--%>
                                             <td>ADMIN</td>
                                         </tr>
                                         <tr>
                                             <td>Customer ID</td>
-<%--                                            <td>${systemUser.id}</td>--%>
+                                            <%--                                            <td>${systemUser.id}</td>--%>
                                             <td>jfwfyh793r32ur82ury278rhe2ye28yyhdo</td>
                                         </tr>
                                         </tbody>
@@ -147,8 +151,9 @@
                                     <h6 class="font-weight-bold text-primary">Status</h6>
                                     <ul class="list-group">
                                         <li class="list-group-item">
-<%--                                            <strong>Status:</strong> ${systemUser.systemUserStatus}</li>--%>
-                                            <strong>Status:</strong> ACTIVE</li>
+                                            <%--                                            <strong>Status:</strong> ${systemUser.systemUserStatus}</li>--%>
+                                            <strong>Status:</strong> ACTIVE
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

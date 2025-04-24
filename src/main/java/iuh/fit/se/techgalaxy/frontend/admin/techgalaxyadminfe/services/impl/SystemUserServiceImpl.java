@@ -22,24 +22,8 @@ public class SystemUserServiceImpl implements SystemUserService {
     private final ObjectMapper objectMapper;
     private static final String ENDPOINT = "http://localhost:8081";
 
-    private static final String DEFAULT_MALE_AVATAR = "undraw_profile.svg";
-    private static final String DEFAULT_FEMALE_AVATAR = "undraw_profile_1.svg";
-
-    private void setDefaultAvatarIfMissing(SystemUserRequestDTO systemUserRequestDTO) {
-        if (isAvatarMissing(systemUserRequestDTO)) {
-            systemUserRequestDTO.setAvatar(getAvatarBasedOnGender(systemUserRequestDTO));
-        }
-    }
-
     private boolean isAvatarMissing(SystemUserRequestDTO systemUserRequestDTO) {
         return systemUserRequestDTO.getAvatar() == null || systemUserRequestDTO.getAvatar().isEmpty();
-    }
-
-    private String getAvatarBasedOnGender(SystemUserRequestDTO systemUserRequestDTO) {
-        if (systemUserRequestDTO.getGender() == Gender.FEMALE) {
-            return DEFAULT_FEMALE_AVATAR;
-        }
-        return DEFAULT_MALE_AVATAR;
     }
 
     public SystemUserServiceImpl(ObjectMapper objectMapper, RestClient restClient) {
@@ -107,8 +91,6 @@ public class SystemUserServiceImpl implements SystemUserService {
         SystemUserResponseDTO.AccountResponse account = new SystemUserResponseDTO.AccountResponse();
         account.setId(userRegisterResponse.getId());
 
-        setDefaultAvatarIfMissing(systemUserRequestDTO);
-
         return restClient.post()
                 .uri(ENDPOINT + "/system-users")
                 .header("Authorization", "Bearer " + accessToken)
@@ -127,7 +109,6 @@ public class SystemUserServiceImpl implements SystemUserService {
 
     @Override
     public DataResponse<SystemUserResponseDTO> update(SystemUserRequestDTO systemUserRequestDTO, String accessToken) {
-        setDefaultAvatarIfMissing(systemUserRequestDTO);
 
         return restClient.put()
                 .uri(ENDPOINT + "/system-users/" + systemUserRequestDTO.getId())
