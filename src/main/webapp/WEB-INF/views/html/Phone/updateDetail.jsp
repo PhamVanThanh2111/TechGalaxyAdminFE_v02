@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +12,10 @@
     <link rel="icon" href="<c:url value='/images/favicon/favicon.ico' />">
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/images/favicon/favicon-16x16.png' />">
     <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/favicon/favicon-32x32.png' />">
-    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
-    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
+    <link rel="icon" type="image/png" sizes="512x512"
+          href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
     <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/favicon/apple-touch-icon.png' />">
     <link rel="manifest" href="<c:url value='/images/favicon/site.webmanifest' />">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -19,7 +23,8 @@
     <meta name="theme-color" content="#ffffff">
 
     <title>Update Variant Detail</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"
+          type="text/css">
     <link href="<c:url value='/css/sb-admin-2.min.css' />" rel="stylesheet">
     <style>
         .toast-container {
@@ -42,7 +47,8 @@
     <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
         <!-- Success Toast -->
         <c:if test="${not empty successMessage}">
-            <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert"
+                 aria-live="assertive" aria-atomic="true">
                 <div class="d-flex">
                     <div class="toast-body">
                             ${successMessage}
@@ -53,7 +59,8 @@
 
         <!-- Error Toast -->
         <c:if test="${not empty errorMessage}">
-            <div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert"
+                 aria-live="assertive" aria-atomic="true">
                 <div class="d-flex">
                     <div class="toast-body">
                             ${errorMessage}
@@ -63,7 +70,7 @@
         </c:if>
     </div>
     <!-- Sidebar -->
-    <jsp:include page="../General/Sidebar.jsp" />
+    <jsp:include page="../General/Sidebar.jsp"/>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -73,7 +80,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <jsp:include page="../General/Topbar.jsp" />
+            <jsp:include page="../General/Topbar.jsp"/>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -81,7 +88,8 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <a href="/products/${productId}/variants/${variantId}/details" class="btn btn-outline-primary btn-lg me-3">
+                    <a href="/products/${productId}/variants/${variantId}/details"
+                       class="btn btn-outline-primary btn-lg me-3">
                         <i class="fas fa-arrow-left"></i> Back
                     </a>
                     <h1 class="h3 mb-0 text-gray-800">Update Product Detail</h1>
@@ -93,40 +101,43 @@
                         <h6 class="m-0 font-weight-bold text-primary">Edit Detail</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/${productId}/variants/${variantId}/details/update/${detail.id}" method="post">
+                        <form:form method="post" modelAttribute="updateRequest"
+                                   action="/products/${productId}/variants/${variantId}/details/update/${detail.id}">
+
+                            <!-- Price -->
                             <!-- Price -->
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="number" class="form-control" id="price" name="price" step="0.01" value="${detail.price}" required>
+                                <form:input path="price" cssClass="form-control" step="0.01"/>
+                                <form:errors path="price" cssClass="text-danger"/>
                             </div>
 
                             <!-- Sale -->
                             <div class="form-group">
                                 <label for="sale">Sale (%)</label>
-                                <input type="number" class="form-control" id="sale" name="sale" step="0.01" value="${detail.sale}" min="0" max="1" required>
+                                <form:input path="sale" cssClass="form-control" step="0.01" min="0" max="1"/>
+                                <form:errors path="sale" cssClass="text-danger"/>
                             </div>
 
                             <!-- Status -->
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <select class="form-control" id="status" name="status" required>
-                                    <c:forEach items="${ProductStatus}" var="statusOption">
-                                        <option value="${statusOption}" <c:if test="${detail.status == statusOption}">selected</c:if>>
-                                                ${statusOption.displayName}
-                                        </option>
-                                    </c:forEach>
-                                </select>
+                                <form:select path="status" cssClass="form-control">
+                                    <form:options items="${ProductStatus}"/>
+                                </form:select>
+                                <form:errors path="status" cssClass="text-danger"/>
                             </div>
 
                             <!-- Quantity -->
                             <div class="form-group">
                                 <label for="quantity">Quantity</label>
-                                <input type="number" class="form-control" id="quantity" name="quantity" value="${detail.quantity}" required>
+                                <form:input path="quantity" cssClass="form-control"/>
+                                <form:errors path="quantity" cssClass="text-danger"/>
                             </div>
 
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-success btn-block mt-4">Save Changes</button>
-                        </form>
+                        </form:form>
                     </div>
                 </div>
 
@@ -142,21 +153,21 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<jsp:include page="../layout/LogoutModal.jsp" />
+<jsp:include page="../layout/LogoutModal.jsp"/>
 <script>
     // Wait until DOM is fully loaded
     document.addEventListener("DOMContentLoaded", function () {
         // Initialize and show success toast
         const successToastElement = document.getElementById('successToast');
         if (successToastElement) {
-            const successToast = new bootstrap.Toast(successToastElement, { delay: 5000 }); // 5s delay
+            const successToast = new bootstrap.Toast(successToastElement, {delay: 5000}); // 5s delay
             successToast.show();
         }
 
         // Initialize and show error toast
         const errorToastElement = document.getElementById('errorToast');
         if (errorToastElement) {
-            const errorToast = new bootstrap.Toast(errorToastElement, { delay: 5000 }); // 5s delay
+            const errorToast = new bootstrap.Toast(errorToastElement, {delay: 5000}); // 5s delay
             errorToast.show();
         }
     });

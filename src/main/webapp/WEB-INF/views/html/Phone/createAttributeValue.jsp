@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,22 +57,28 @@
                         <h6 class="m-0 font-weight-bold text-primary">Add Attribute Value</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/${productId}/variants/${variantId}/attributes/create" method="post">
+                        <form:form method="post"
+                                   modelAttribute="attributeValueRequest"
+                                   action="/products/${productId}/variants/${variantId}/attributes/create">
                             <div class="form-group">
                                 <label for="attributeId">Attribute</label>
-                                <select class="form-control" name="attributeId" required>
-                                    <option value="">-- Select Attribute --</option>
+                                <form:select path="attributeId" cssClass="form-control" required="required">
+                                    <form:option value="">-- Select Attribute --</form:option>
                                     <c:forEach var="attribute" items="${attributes}">
-                                        <option value="${attribute.id}">${attribute.name}</option>
+                                        <form:option value="${attribute.id}">${attribute.name}</form:option>
                                     </c:forEach>
-                                </select>
+                                </form:select>
+                                <form:errors path="attributeId" cssClass="text-danger"/>
                             </div>
+
                             <div class="form-group">
                                 <label for="value">Value</label>
-                                <input type="text" class="form-control" name="value" required>
+                                <form:input path="value" cssClass="form-control" required="required"/>
+                                <form:errors path="value" cssClass="text-danger"/>
                             </div>
+
                             <button type="submit" class="btn btn-success btn-block mt-4">Save Attribute Value</button>
-                        </form>
+                        </form:form>
 
                     </div>
                 </div>

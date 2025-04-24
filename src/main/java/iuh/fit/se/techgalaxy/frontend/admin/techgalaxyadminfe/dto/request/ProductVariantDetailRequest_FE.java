@@ -1,5 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request;
 
+import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,13 +15,20 @@ import java.util.List;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductVariantDetailRequest_FE {
-    String memid;
+    @NotBlank(message = "Memory must be selected")
+    private String memid;
 
-    Double price;
+    @NotNull(message = "Price is required")
+    @PositiveOrZero(message = "Price must be 0 or more")
+    private Double price;
 
-    Double sale;
+    @NotNull(message = "Sale is required")
+    @DecimalMin(value = "0.0", message = "Sale must be >= 0")
+    @DecimalMax(value = "100.0", message = "Sale must be <= 100")
+    private Double sale;
 
-    List<ColorRequest> colors = new ArrayList<>();
+    @NotEmpty(message = "At least one color must be added")
+    private List<ColorRequest> colors;
 
     @Getter
     @Setter
@@ -29,10 +37,13 @@ public class ProductVariantDetailRequest_FE {
     @ToString
     @FieldDefaults(level = AccessLevel.PRIVATE)
     public static class ColorRequest {
-        int quantity;
+        @NotNull(message = "Quantity is required")
+        @Min(value = 1, message = "Quantity must be at least 1")
+        private Integer quantity;
 
-        String colorId;
+        @NotBlank(message = "Color must be selected")
+        private String colorId;
 
-        MultipartFile[] images;
+        private MultipartFile[] images;
     }
 }

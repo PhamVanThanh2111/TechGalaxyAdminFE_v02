@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,57 +60,66 @@
                         <h6 class="m-0 font-weight-bold text-primary">Add Details</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/${productId}/variants/${variantId}/details/add" method="post" enctype="multipart/form-data">
+                        <form:form method="post" modelAttribute="variantDetailRequest"
+                                   action="/products/${productId}/variants/${variantId}/details/add"
+                                   enctype="multipart/form-data">
+
                             <!-- Memory -->
                             <div class="form-group">
                                 <label for="memid">Memory</label>
-                                <select class="form-control" id="memid" name="memid" required>
+                                <form:select path="memid" cssClass="form-control" required="required">
+                                    <form:option value="">-- Select Memory --</form:option>
                                     <c:forEach var="memory" items="${memories}">
-                                        <option value="${memory.id}">${memory.name}</option>
+                                        <form:option value="${memory.id}">${memory.name}</form:option>
                                     </c:forEach>
-                                </select>
+                                </form:select>
+                                <form:errors path="memid" cssClass="text-danger"/>
                             </div>
 
                             <!-- Price -->
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" required>
+                                <form:input path="price" cssClass="form-control" step="0.01" min="0"/>
+                                <form:errors path="price" cssClass="text-danger"/>
                             </div>
 
                             <!-- Sale -->
                             <div class="form-group">
                                 <label for="sale">Sale (%)</label>
-                                <input type="number" class="form-control" id="sale" name="sale" step="0.01" min="0" max="100" required>
+                                <form:input path="sale" cssClass="form-control" step="0.01" min="0" max="100"/>
+                                <form:errors path="sale" cssClass="text-danger"/>
                             </div>
 
                             <!-- Colors -->
-                            <div id="color-container">
-                                <!-- Initial color group -->
+                            <c:forEach var="color" items="${variantDetailRequest.colors}" varStatus="i">
                                 <div class="color-group mt-4">
-                                    <h5>Color 1</h5>
                                     <div class="form-group">
-                                        <label for="colors[0].colorId">Color</label>
-                                        <select class="form-control" id="colors[0].colorId" name="colors[0].colorId" required>
-                                            <option value="">-- Select Color --</option>
-                                            <c:forEach items="${availableColors}" var="color">
-                                                <option value="${color.id}">${color.name}</option>
+                                        <label>Color</label>
+                                        <form:select path="colors[${i.index}].colorId" cssClass="form-control">
+                                            <form:option value="">-- Select Color --</form:option>
+                                            <c:forEach var="c" items="${availableColors}">
+                                                <form:option value="${c.id}">${c.name}</form:option>
                                             </c:forEach>
-                                        </select>
+                                        </form:select>
+                                        <form:errors path="colors[${i.index}].colorId" cssClass="text-danger"/>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="colors[0].quantity">Quantity</label>
-                                        <input type="number" class="form-control" id="colors[0].quantity" name="colors[0].quantity" min="1" required>
+                                        <label>Quantity</label>
+                                        <form:input path="colors[${i.index}].quantity" type="number" cssClass="form-control" min="1"/>
+                                        <form:errors path="colors[${i.index}].quantity" cssClass="text-danger"/>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="colors[0].images">Images</label>
-                                        <input type="file" class="form-control-file" id="colors[0].images" name="colors[0].images" multiple>
+                                        <label>Images</label>
+                                        <input type="file" name="colors[${i.index}].images" class="form-control-file" multiple>
                                     </div>
                                 </div>
-                            </div>
+                            </c:forEach>
 
-                            <!-- Submit Button -->
+                            <!-- Submit -->
                             <button type="submit" class="btn btn-success btn-block mt-4">Save Details</button>
-                        </form>
+                        </form:form>
                     </div>
                 </div>
 

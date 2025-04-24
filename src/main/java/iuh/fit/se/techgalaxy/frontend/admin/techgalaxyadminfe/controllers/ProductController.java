@@ -97,7 +97,7 @@ public class ProductController {
 
             // Lưu thông tin sản phẩm
             DataResponse<ProductResponse> productResponseDataResponse = productService.createProduct(productRequest, accessToken);
-            System.out.println("productResponseDataResponse: "+productResponseDataResponse);
+            System.out.println("productResponseDataResponse: " + productResponseDataResponse);
             if (productResponseDataResponse.getStatus() != 200) {
                 System.out.println("Lỗi khi lưu sản phẩm.");
                 redirectAttributes.addFlashAttribute("errorMessage", "Error saving product.");
@@ -325,7 +325,7 @@ public class ProductController {
             System.out.println("Variant: " + variant);
 
             DataResponse<ProductVariantDetailResponse> productVariantDetailResponseDataResponse = productService.getAllVariantDetailsByVariantId(variantId);
-
+            System.out.println(productVariantDetailResponseDataResponse.getData());
             if (productVariantDetailResponseDataResponse.getStatus() != 200 || productVariantDetailResponseDataResponse.getData() == null || productVariantDetailResponseDataResponse.getData().isEmpty()) {
                 modelAndView.addObject("errorMessage", "No variant details found for the variants.");
                 modelAndView.addObject("productId", producctID);
@@ -363,6 +363,7 @@ public class ProductController {
             System.out.println("Forbidden request: " + e.getMessage());
             return new ModelAndView("redirect:/home");
         } catch (Exception e) {
+            System.out.println("Exception request: " + e.getMessage());
             return new ModelAndView("redirect:/home");
         }
     }
@@ -398,10 +399,19 @@ public class ProductController {
     }
 
     @PostMapping("/variants/update/{variantId}")
-    public String updateVariant(@PathVariable String variantId, @ModelAttribute ProductVariantRequest_FE request, RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
+    public String updateVariant(@PathVariable String variantId,
+                                @Valid @ModelAttribute("variant") ProductVariantRequest_FE request,
+                                BindingResult result,
+                                Model model,
+                                RedirectAttributes redirectAttributes,
+                                HttpSession session){
         String accessToken = (String) session.getAttribute("accessToken");
         if (accessToken == null) {
             return "redirect:/login";
+        }
+        if (result.hasErrors()) {
+            model.addAttribute("usageCategories", usageCategoryService.getAllUsageCategories().getData());
+            return "html/Phone/editVariant";
         }
         try {
             List<ProductVariantResponse> variants = (List<ProductVariantResponse>) productService.getVariantById(variantId).getData();
@@ -546,13 +556,20 @@ public class ProductController {
 
     @PostMapping("/{productId}/variants/add")
     public String saveVariant(@PathVariable String productId,
-                              @ModelAttribute("variant") ProductVariantRequest_FE variantRequest,
+                              @ModelAttribute("variant") @Valid ProductVariantRequest_FE variantRequest,
+                              BindingResult bindingResult,
+                              Model model,
                               RedirectAttributes redirectAttributes,
                               HttpSession session,
                               HttpServletResponse response) {
         String accessToken = (String) session.getAttribute("accessToken");
         if (accessToken == null) {
             return "redirect:/login";
+        }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("productId", productId);
+            model.addAttribute("usageCategories", usageCategoryService.getAllUsageCategories().getData());
+            return "html/Phone/formVariants";
         }
         try {
             ProductVariantRequest request = new ProductVariantRequest();
@@ -612,8 +629,9 @@ public class ProductController {
         try {
             ModelAndView modelAndView = new ModelAndView("html/Phone/formVariantDetails");
             ProductVariantDetailRequest_FE request = new ProductVariantDetailRequest_FE();
-            request.setColors(new ArrayList<>()); // Khởi tạo danh sách rỗng để tránh lỗi null
-
+            List<ProductVariantDetailRequest_FE.ColorRequest> colorRequests = new ArrayList<>();
+            colorRequests.add(new ProductVariantDetailRequest_FE.ColorRequest());
+            request.setColors(colorRequests);
             model.addAttribute("productId", productId);
             model.addAttribute("variantId", variantId);
             colorService.getAllColors().getData().forEach(color ->
@@ -639,11 +657,22 @@ public class ProductController {
     public String saveVariantDetail(
             @PathVariable String productId,
             @PathVariable String variantId,
-            @ModelAttribute("variantDetailRequest") ProductVariantDetailRequest_FE request,
-            RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response) {
+            @ModelAttribute("variantDetailRequest") @Valid ProductVariantDetailRequest_FE request,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes redirectAttributes,
+            HttpSession session,
+            HttpServletResponse response) {
         String accessToken = (String) session.getAttribute("accessToken");
         if (accessToken == null) {
             return "redirect:/login";
+        }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("productId", productId);
+            model.addAttribute("variantId", variantId);
+            model.addAttribute("availableColors", colorService.getAllColors().getData());
+            model.addAttribute("memories", memoryService.getAllMemories().getData());
+            return "redirect:/products/" + productId + "/variants/" + variantId + "/details";
         }
         try {
             System.out.println("Received Request: " + request);
@@ -798,6 +827,12 @@ public class ProductController {
 
             List<ProductDetailResponse> details = (List<ProductDetailResponse>) detailResponseDataResponse.getData();
             ProductDetailResponse detail = details.get(0);
+            model.addAttribute("updateRequest", new ProductDetailUpdateRequest(
+                    detail.getPrice(),
+                    detail.getSale(),
+                    detail.getStatus(),
+                    detail.getQuantity()
+            ));
 
             model.addAttribute("detail", detail);
             model.addAttribute("productId", productId);
@@ -820,17 +855,21 @@ public class ProductController {
             @PathVariable String productId,
             @PathVariable String variantId,
             @PathVariable String detailId,
-            @Valid @ModelAttribute ProductDetailUpdateRequest updateRequest,
+            @Valid @ModelAttribute("updateRequest") ProductDetailUpdateRequest updateRequest,
             BindingResult result,
+            Model model,
             RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response1) {
         String accessToken = (String) session.getAttribute("accessToken");
         if (accessToken == null) {
             return "redirect:/login";
         }
         if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Validation failed: Sale is invalid or out of range (0.00-1.00).");
-            return "redirect:/products/" + productId + "/variants/" + variantId + "/details/update/" + detailId;
+            model.addAttribute("productId", productId);
+            model.addAttribute("variantId", variantId);
+            model.addAttribute("ProductStatus", ProductStatus.values());
+            return "html/Phone/updateDetail";
         }
+
         try {
             ProductStatus status = ProductStatus.fromString(updateRequest.getStatus().toString());
             updateRequest.setStatus(status);
@@ -940,6 +979,7 @@ public class ProductController {
             model.addAttribute("attributes", attributes);
             model.addAttribute("productId", productId);
             model.addAttribute("variantId", variantId);
+            model.addAttribute("attributeValueRequest", new AttributeValueRequest());
             return "html/Phone/createAttributeValue";
         } catch (HttpClientErrorException.Unauthorized e) {
             System.out.println("Unauthorized request: " + e.getMessage());
@@ -956,12 +996,23 @@ public class ProductController {
     public String createAttributeValueByVariantId(
             @PathVariable String productId,
             @PathVariable String variantId,
-            @ModelAttribute AttributeValueRequest attributeValueRequest,
+            @ModelAttribute("attributeValueRequest") @Valid AttributeValueRequest attributeValueRequest,
+            BindingResult bindingResult,
+            Model model,
             RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response1) {
         String accessToken = (String) session.getAttribute("accessToken");
 
         if (accessToken == null) {
             return "redirect:/login";
+        }
+        if (bindingResult.hasErrors()) {
+            // Load lại attribute list để render lại form
+            DataResponse<AttributeResponse> attributesResponse = attributeService.getAllAttribute();
+            List<AttributeResponse> attributes = (List<AttributeResponse>) attributesResponse.getData();
+            model.addAttribute("attributes", attributes);
+            model.addAttribute("productId", productId);
+            model.addAttribute("variantId", variantId);
+            return "html/Phone/createAttributeValue";
         }
         try {
             System.out.println("Received Request: " + attributeValueRequest);
@@ -1041,16 +1092,23 @@ public class ProductController {
 
             List<ValueResponse> values = (List<ValueResponse>) valueResponse.getData();
             ValueResponse value = values.get(0);
-            System.out.println("Value: " + value);
-
-            // Get Attribute by Name
+            System.out.println("Value: " + value.toString());
+            // Get Attribute by Id
             DataResponse<AttributeResponse> attributeResponse = attributeService.getAttributeById(value.getAttributeId());
-            if (attributeResponse == null || attributeResponse.getStatus() != 200 || attributeResponse.getData() == null) {
+
+            if (attributeResponse.getStatus() != 200) {
                 model.addAttribute("errorMessage", "Failed to load attribute.");
                 return "redirect:/products/" + productId + "/variants/" + variantId + "/attributes";
             }
             List<AttributeResponse> attributes = (List<AttributeResponse>) attributeResponse.getData();
             AttributeResponse attribute = attributes.get(0);
+            System.out.println("Get Attribute by Id: " + attribute.toString());
+            AttributeValueUpdateRequest updateRequest = new AttributeValueUpdateRequest();
+            updateRequest.setId(value.getId());
+            updateRequest.setValue(value.getValue());
+            updateRequest.setAttributeId(value.getAttributeId());
+
+            model.addAttribute("updateRequest", updateRequest);
 
             model.addAttribute("attribute", attribute);
             model.addAttribute("value", value);
@@ -1073,16 +1131,30 @@ public class ProductController {
     public String updateAttributeValue(
             @PathVariable String productId,
             @PathVariable String variantId,
-            @ModelAttribute AttributeValueUpdateRequest updateRequest,
+            @Valid @ModelAttribute("updateRequest") AttributeValueUpdateRequest updateRequest,
+            BindingResult result,
+            Model model,
             RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response1) {
         String accessToken = (String) session.getAttribute("accessToken");
         if (accessToken == null) {
             return "redirect:/login";
         }
+        if (result.hasErrors()) {
+            // Load lại data và trả về form
+            DataResponse<AttributeResponse> attributeResponse = attributeService.getAttributeById(updateRequest.getAttributeId());
+            AttributeResponse attribute = ((List<AttributeResponse>) attributeResponse.getData()).get(0);
+
+            model.addAttribute("attribute", attribute);
+            model.addAttribute("updateRequest", updateRequest);
+            model.addAttribute("productId", productId);
+            model.addAttribute("variantId", variantId);
+            return "html/Phone/updateValue";
+        }
         try {
 
             System.out.println("Received Request: " + updateRequest);
             DataResponse<ValueResponse> response = attributeService.updateValueProductVariant(variantId, updateRequest, accessToken);
+            System.out.println(response.getData());
             if (response == null || response.getStatus() != 200) {
                 redirectAttributes.addFlashAttribute("errorMessage", "Failed to update attribute value.");
             } else {

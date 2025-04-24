@@ -13,6 +13,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductDetailUpdateRequest {
+    @Min(value = 0, message = "price must be at least 0")
     Double price;
     @Min(value = 0, message = "Sale must be at least 0%")
     @Max(value = 1, message = "Sale cannot exceed 100%")

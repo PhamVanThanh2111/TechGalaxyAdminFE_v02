@@ -19,7 +19,6 @@ public class AuthInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        System.out.println("Access Token in Interceptor: " + session.getAttribute("accessToken"));
 
         return true;
     }

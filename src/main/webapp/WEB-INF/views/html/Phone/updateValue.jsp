@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +11,10 @@
     <link rel="icon" href="<c:url value='/images/favicon/favicon.ico' />">
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/images/favicon/favicon-16x16.png' />">
     <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/favicon/favicon-32x32.png' />">
-    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
-    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
+    <link rel="icon" type="image/png" sizes="512x512"
+          href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
     <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/favicon/apple-touch-icon.png' />">
     <link rel="manifest" href="<c:url value='/images/favicon/site.webmanifest' />">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -18,7 +22,8 @@
     <meta name="theme-color" content="#ffffff">
 
     <title>Update Attribute Value</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"
+          type="text/css">
     <link href="<c:url value='/css/sb-admin-2.min.css' />" rel="stylesheet">
 </head>
 
@@ -27,7 +32,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <jsp:include page="../General/Sidebar.jsp" />
+    <jsp:include page="../General/Sidebar.jsp"/>
     <!-- End of Sidebar -->
 
     <div id="content-wrapper" class="d-flex flex-column">
@@ -36,7 +41,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <jsp:include page="../General/Topbar.jsp" />
+            <jsp:include page="../General/Topbar.jsp"/>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -44,7 +49,8 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <a href="/products/${productId}/variants/${variantId}/attributes" class="btn btn-outline-primary btn-lg">
+                    <a href="/products/${productId}/variants/${variantId}/attributes"
+                       class="btn btn-outline-primary btn-lg">
                         <i class="fas fa-arrow-left"></i> Back
                     </a>
                     <h1 class="h3 mb-0 text-gray-800">Update Attribute Value</h1>
@@ -56,29 +62,30 @@
                         <h6 class="m-0 font-weight-bold text-primary">Edit Attribute Value</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/${productId}/variants/${variantId}/attributes/update/${value.id}" method="post">
+                        <form:form action="/products/${productId}/variants/${variantId}/attributes/update/${updateRequest.id}"
+                                   modelAttribute="updateRequest" method="post">
+                            <!-- Hidden ID -->
+                            <form:input path="id" type="text"/>
+
+                            <!-- Attribute Name (readonly) -->
                             <div class="form-group">
-                                <input type="hidden" class="form-control" id="id" name="id" value="${value.id}" readonly>
-                            </div>
-                            <!-- Display Attribute Name -->
-                            <div class="form-group">
-                                <label for="attributeName">Attribute</label>
-                                <input type="text" class="form-control" id="attributeName" name="attributeName" value="${attribute.name}" readonly>
+                                <label>Attribute</label>
+                                <input type="text" class="form-control" value="${attribute.name}" readonly>
                             </div>
 
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="attributeId" name="attributeId" value="${variantId}" readonly>
-                            </div>
+                            <!-- Hidden Attribute ID -->
+                            <form:input path="attributeId" type="hidden"/>
 
-                            <!-- Update Attribute Value -->
+                            <!-- Value Input -->
                             <div class="form-group">
                                 <label for="value">Value</label>
-                                <input type="text" class="form-control" id="value" name="value" value="${value.value}" required>
+                                <form:input path="value" id="value" cssClass="form-control"/>
+                                <form:errors path="value" cssClass="text-danger"/>
                             </div>
 
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-success btn-block mt-4">Save Changes</button>
-                        </form>
+                        </form:form>
                     </div>
                 </div>
 
@@ -94,7 +101,7 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<jsp:include page="../General/LogoutModal.jsp" />
+<jsp:include page="../General/LogoutModal.jsp"/>
 
 <!-- JavaScript -->
 <script src="<c:url value='/jquery/jquery.min.js' />"></script>

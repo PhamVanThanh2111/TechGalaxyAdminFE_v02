@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +11,10 @@
     <link rel="icon" href="<c:url value='/images/favicon/favicon.ico' />">
     <link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/images/favicon/favicon-16x16.png' />">
     <link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/images/favicon/favicon-32x32.png' />">
-    <link rel="icon" type="image/png" sizes="192x192" href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
-    <link rel="icon" type="image/png" sizes="512x512" href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
+    <link rel="icon" type="image/png" sizes="192x192"
+          href="<c:url value='/images/favicon/android-chrome-192x192.png' />">
+    <link rel="icon" type="image/png" sizes="512x512"
+          href="<c:url value='/images/favicon/android-chrome-512x512.png' />">
     <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='/images/favicon/apple-touch-icon.png' />">
     <link rel="manifest" href="<c:url value='/images/favicon/site.webmanifest' />">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -18,7 +22,8 @@
     <meta name="theme-color" content="#ffffff">
 
     <title>Add Variant</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"
+          type="text/css">
     <link href="<c:url value='/css/sb-admin-2.min.css' />" rel="stylesheet">
     <style>
         #avatarPreview {
@@ -37,7 +42,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <jsp:include page="../General/Sidebar.jsp" />
+    <jsp:include page="../General/Sidebar.jsp"/>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -47,7 +52,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <jsp:include page="../General/Topbar.jsp" />
+            <jsp:include page="../General/Topbar.jsp"/>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -69,64 +74,79 @@
                         <h6 class="m-0 font-weight-bold text-primary">Add Variant</h6>
                     </div>
                     <div class="card-body">
-                        <form action="/products/${productId}/variants/add" method="post" enctype="multipart/form-data">
+                        <form:form modelAttribute="variant" method="post"
+                                   enctype="multipart/form-data"
+                                   action="/products/${productId}/variants/add">
+
+                            <!-- Name -->
                             <!-- Name -->
                             <div class="form-group">
                                 <label for="variantName">Name</label>
-                                <input type="text" class="form-control" id="variantName" name="name" placeholder="Enter variant name" required>
+                                <form:input path="name" cssClass="form-control" id="variantName"
+                                            placeholder="Enter variant name"/>
+                                <form:errors path="name" cssClass="text-danger"/>
                             </div>
 
                             <!-- Description -->
                             <div class="form-group">
                                 <label for="variantDescription">Description</label>
-                                <textarea class="form-control" id="variantDescription" name="description" rows="3" placeholder="Enter variant description"></textarea>
+                                <form:textarea path="description" cssClass="form-control" id="variantDescription"
+                                               rows="3"/>
                             </div>
 
                             <!-- Content -->
                             <div class="form-group">
                                 <label for="variantContent">Content</label>
-                                <textarea class="form-control" id="variantContent" name="content" rows="5" placeholder="Enter variant content"></textarea>
+                                <form:textarea path="content" cssClass="form-control" id="variantContent" rows="5"/>
                             </div>
 
                             <!-- Avatar -->
                             <div class="form-group">
                                 <label for="variantAvatar">Avatar</label>
-                                <input type="file" class="form-control-file" id="variantAvatar" name="avatar" accept=".png, .jpg, .jpeg">
-                                <img id="avatarPreview" alt="Avatar Preview" />
+                                <input type="file" class="form-control-file" id="variantAvatar" name="avatar"
+                                       accept=".png, .jpg, .jpeg">
+                                <img id="avatarPreview" alt="Avatar Preview"/>
                             </div>
 
                             <!-- Featured -->
                             <div class="form-group">
                                 <label for="variantFeatured">Featured</label>
-                                <select class="form-control" id="variantFeatured" name="featured">
-                                    <option value="true">Yes</option>
-                                    <option value="false" selected>No</option>
-                                </select>
+                                <form:select path="featured" cssClass="form-control" id="variantFeatured">
+                                    <form:option value="">-- Select --</form:option>
+                                    <form:option value="true">Yes</form:option>
+                                    <form:option value="false">No</form:option>
+                                </form:select>
+                                <form:errors path="featured" cssClass="text-danger"/>
                             </div>
 
                             <!-- Status -->
                             <div class="form-group">
                                 <label for="variantStatus">Status</label>
-                                <select class="form-control" id="variantStatus" name="status">
-                                    <option value="AVAILABLE">Available</option>
-                                    <option value="OUT_OF_STOCK">Out of Stock</option>
-                                    <option value="DISCONTINUED">Discontinued</option>
-                                </select>
+                                <form:select path="status" cssClass="form-control" id="variantStatus">
+                                    <form:option value="">-- Select --</form:option>
+                                    <form:option value="AVAILABLE">Available</form:option>
+                                    <form:option value="OUT_OF_STOCK">Out of Stock</form:option>
+                                    <form:option value="DISCONTINUED">Discontinued</form:option>
+                                </form:select>
+                                <form:errors path="status" cssClass="text-danger"/>
                             </div>
 
                             <!-- Usage Category -->
                             <div class="form-group">
                                 <label for="usageCategoryId">Usage Category</label>
-                                <select class="form-control" id="usageCategoryId" name="usageCategoryId">
+                                <form:select path="usageCategoryId" cssClass="form-control" id="usageCategoryId">
+                                    <form:option value="">-- Select --</form:option>
                                     <c:forEach items="${usageCategories}" var="usageCategory">
-                                        <option value="${usageCategory.id}">${usageCategory.name}</option>
+                                        <form:option value="${usageCategory.id}">${usageCategory.name}</form:option>
                                     </c:forEach>
-                                </select>
+                                </form:select>
+                                <form:errors path="usageCategoryId" cssClass="text-danger"/>
                             </div>
 
                             <!-- Submit Button -->
                             <button type="submit" class="btn btn-success btn-block">Add Variant</button>
-                        </form>
+                        </form:form>
+
                     </div>
                 </div>
 
@@ -142,7 +162,7 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<jsp:include page="../General/LogoutModal.jsp" />
+<jsp:include page="../General/LogoutModal.jsp"/>
 
 <!-- JavaScript -->
 <script src="<c:url value='/jquery/jquery.min.js' />"></script>
