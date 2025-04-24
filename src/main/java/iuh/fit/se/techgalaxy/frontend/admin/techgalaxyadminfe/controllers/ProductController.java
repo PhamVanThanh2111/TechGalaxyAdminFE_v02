@@ -97,7 +97,7 @@ public class ProductController {
 
             // Lưu thông tin sản phẩm
             DataResponse<ProductResponse> productResponseDataResponse = productService.createProduct(productRequest, accessToken);
-
+            System.out.println("productResponseDataResponse: "+productResponseDataResponse);
             if (productResponseDataResponse.getStatus() != 200) {
                 System.out.println("Lỗi khi lưu sản phẩm.");
                 redirectAttributes.addFlashAttribute("errorMessage", "Error saving product.");
@@ -245,7 +245,7 @@ public class ProductController {
             ModelAndView modelAndView = new ModelAndView("html/Phone/showPhone");
             System.out.println("Fetching product list...");
             DataResponse<ProductResponse> productResponseDataResponse = productService.getAllProducts(accessToken);
-
+            System.out.println(productResponseDataResponse);
             if (productResponseDataResponse == null || productResponseDataResponse.getStatus() != 200 || productResponseDataResponse.getData() == null) {
                 System.out.println("Error fetching product list.");
                 modelAndView.addObject("errorMessage", "Unable to fetch product list. Please try again later.");
