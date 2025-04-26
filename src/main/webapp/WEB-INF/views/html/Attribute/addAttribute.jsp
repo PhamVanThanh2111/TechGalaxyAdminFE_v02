@@ -120,37 +120,41 @@
 								<table class="table table-bordered" id="dataTable" width="100%"
 									cellspacing="0">
 
-									<form>
-										<div class="form-group">
-											<label for="basePrice">ID Attribute</label> <input
-												type="text" class="form-control" id=""
-												value="008b425f-fcbe-4b3a-952c-555835a4dc2c" readonly>
-										</div>
+
+									<form
+										action="${pageContext.request.contextPath}/attributes/save"
+										method="post">
 										<div class="form-row">
+											<!-- Name field -->
 											<div class="form-group col-md-6">
-												<label for="discountPercentage">Name</label> <input
-													type="text" class="form-control" id="discountPercentage"
-													value="" min="0" max="100">
+												<label for="name">Name</label> <input type="text"
+													class="form-control" id="name" name="name"
+													value="${attributeRequest.name}"
+													placeholder="Enter attribute name" required />
 											</div>
+
+											<!-- Type dropdown -->
 											<div class="form-group col-md-6">
-												<label for="discountType">Attribute Type</label> <select
-													class="form-control" id="discountType">
+												<label for="type">Attribute Type</label> <select
+													class="form-control" id="type" name="type" required>
 													<option value="">Select a type</option>
-													<option value="percentage">Battery and Charger</option>
-													<option value="fixed">Common</option>
+													<option value="Battery and Charger"
+														<c:if test="${attributeRequest.type == 'Battery and Charger'}">selected</c:if>>Battery
+														and Charger</option>
+													<option value="Common"
+														<c:if test="${attributeRequest.type == 'Common'}">selected</c:if>>Common</option>
+													<!-- Thêm các option khác tuỳ nhu cầu -->
 												</select>
 											</div>
 										</div>
-								
-										<div class="button-group">
+
+										<!-- Buttons -->
+										<div class="button-group mt-3">
 											<button type="submit" class="btn btn-outline-primary">Submit</button>
-											<button type="button" class="btn btn-outline-danger">Cancel</button>
+											<a href="${pageContext.request.contextPath}/attributes"
+												class="btn btn-outline-danger">Cancel</a>
 										</div>
 									</form>
-
-
-									</tbody>
-								</table>
 							</div>
 						</div>
 					</div>

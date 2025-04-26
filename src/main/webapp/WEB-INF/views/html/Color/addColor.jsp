@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -112,32 +113,27 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Add Color
-							</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Add Color</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%"
 									cellspacing="0">
-
-									<form>
-										<div class="form-group">
-											<label for="basePrice">ID Color</label> <input
-												type="text" class="form-control" id=""
-												value="008b425f-fcbe-4b3a-952c-555835a4dc2c" readonly>
-										</div>
+									<form:form method="POST" modelAttribute="color"
+										action="${pageContext.request.contextPath}/colors/save">
 										<div class="form-row">
 											<div class="form-group col-md-12">
-												<label for="discountPercentage">Name</label> <input
-													type="text" class="form-control" id="discountPercentage"
-													value="" min="0" max="100">
+												<label for="name">Name</label>
+												<form:input path="name" cssClass="form-control" id="name" />
 											</div>
 										</div>
 										<div class="button-group">
 											<button type="submit" class="btn btn-outline-primary">Submit</button>
-											<button type="button" class="btn btn-outline-danger">Cancel</button>
+											<a href="${pageContext.request.contextPath}/colors"
+												class="btn btn-outline-danger">Cancel</a>
 										</div>
-									</form>
+									</form:form>
+
 
 									</tbody>
 								</table>

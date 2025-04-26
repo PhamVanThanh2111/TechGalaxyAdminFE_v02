@@ -2,6 +2,8 @@ package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.services.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.AttributeRequest;
 import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.AttributeValueRequest;
 import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.AttributeValueUpdateRequest;
 import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response.AttributeResponse;
@@ -168,6 +170,48 @@ public class AttributeServiceImpl implements AttributeService {
                             return attributeResponseDataResponse;
                         }
                 );
+    }
+
+    @Override
+    public DataResponse<AttributeResponse> createAttribute(AttributeRequest request, String accessToken) {
+        return  restClient.post()
+                .uri(ENDPOINT + "/attributes")
+                .header("Authorization", "Bearer " + accessToken)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(request)
+                .exchange((req, resp) -> {
+                    System.out.println("createAttribute");
+                    System.out.println(resp.getStatusCode());
+                    DataResponse<AttributeResponse> result = null;
+                    if (resp.getBody().available() > 0) {
+                        result = objectMapper.readValue(
+                            resp.getBody().readAllBytes(),
+                            new TypeReference<DataResponse<AttributeResponse>>() {}
+                        );
+                    }
+                    assert result != null;
+                    return result;
+                });
+    }
+
+    @Override
+    public DataResponse<ValueResponse> deleteAttribute(String attributeId, String accessToken) {
+        return restClient.delete()
+                .uri(ENDPOINT + "/attributes/attributes/" + attributeId)
+                .header("Authorization", "Bearer " + accessToken)
+                .exchange((req, resp) -> {
+                    System.out.println("deleteAttribute");
+                    System.out.println(resp.getStatusCode());
+                    DataResponse<ValueResponse> result = null;
+                    if (resp.getBody().available() > 0) {
+                        result = objectMapper.readValue(
+                            resp.getBody().readAllBytes(),
+                            new TypeReference<DataResponse<ValueResponse>>() {}
+                        );
+                    }
+                    assert result != null;
+                    return result;
+                });
     }
 
 

@@ -123,14 +123,12 @@
 
 									<form:form method="POST" modelAttribute="usageCategory"
 										enctype="multipart/form-data"
-										action="${pageContext.request.contextPath}/usagecategories/save">
-
+										action="${pageContext.request.contextPath}/usagecategories/update">
+										<input type="hidden" name="id" value="${usageCategory.id}" />
 										<div class="form-group">
 
 											<label for="name">Name</label>
 											<form:input path="name" cssClass="form-control" id="name" />
-
-
 
 										</div>
 
@@ -163,7 +161,7 @@
 
 										<div class="button-group">
 											<button type="submit" class="btn btn-outline-primary">Submit</button>
-											<a href="${pageContext.request.contextPath}/usage-category"
+											<a href="${pageContext.request.contextPath}/usagecategories"
 												class="btn btn-outline-danger">Cancel</a>
 										</div>
 									</form:form>

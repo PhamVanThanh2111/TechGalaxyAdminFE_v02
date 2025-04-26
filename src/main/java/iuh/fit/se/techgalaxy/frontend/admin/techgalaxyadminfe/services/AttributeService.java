@@ -1,5 +1,6 @@
 package iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.services;
 
+import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.AttributeRequest;
 import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.AttributeValueRequest;
 import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.request.AttributeValueUpdateRequest;
 import iuh.fit.se.techgalaxy.frontend.admin.techgalaxyadminfe.dto.response.AttributeResponse;
@@ -15,10 +16,7 @@ public interface AttributeService {
 
     DataResponse<AttributeResponse> getAttributeById(String id);
 
-
     DataResponse<Object> createAttributeValueByVariantId(String variantId, List<AttributeValueRequest> values, String accessToken);
-
-
 
     DataResponse<ValueResponse> updateValueProductVariant(String variantId, AttributeValueUpdateRequest attributeValueRequest, String accessToken);
 
@@ -27,4 +25,8 @@ public interface AttributeService {
     DataResponse<ValueResponse> getValueById(String valueId);
 
     DataResponse<ValueResponse> getValueByNameAtribute(String name);
+
+	DataResponse<AttributeResponse> createAttribute(AttributeRequest request,String accessToken);
+    DataResponse<ValueResponse> deleteAttribute(String attributeId, String accessToken);
+
 }

@@ -176,7 +176,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Memory Manage</h6>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/memories/detail">Show</a>
+						href="${pageContext.request.contextPath}/memories">Show</a>
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/memories/add">Add</a>
 				</div>
@@ -192,7 +192,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Color Manage</h6>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/colors/detail">Show</a> <a
+						href="${pageContext.request.contextPath}/colors">Show</a> <a
 						class="collapse-item"
 						href="${pageContext.request.contextPath}/colors/add">Add</a>
 				</div>
@@ -208,7 +208,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Usage Category Manage</h6>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/usagecategories/detail">Show</a>
+						href="${pageContext.request.contextPath}/usagecategories">Show</a>
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/usagecategories/add">Add</a>
 				</div>
@@ -225,7 +225,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Attribute Manage</h6>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/attributes/detail">Show</a>
+						href="${pageContext.request.contextPath}/attributes">Show</a>
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/attributes/add">Add</a>
 				</div>
@@ -242,7 +242,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Role Manage</h6>
 					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/roles/detail">Show</a>
+						href="${pageContext.request.contextPath}/roles">Show</a>
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/roles/add">Add</a>
 				</div>

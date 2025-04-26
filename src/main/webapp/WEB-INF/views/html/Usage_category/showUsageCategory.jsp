@@ -105,13 +105,14 @@
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-2 text-gray-800">Usage Categories</h1>
-					<p class="mb-4">This is a Usage Category management table, displaying
-						user data such as name, phone, status and so on.</p>
+					<p class="mb-4">This is a Usage Category management table,
+						displaying user data such as name, phone, status and so on.</p>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Data Usgae Category</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Data Usgae
+								Category</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -121,9 +122,7 @@
 										<tr>
 											<th>Id</th>
 											<th>Name</th>
-											<th>Description</th>
 											<th>Status</th>
-											<th>Avatar</th>
 											<th>Control</th>
 
 										</tr>
@@ -132,169 +131,38 @@
 										<tr>
 											<th>Id</th>
 											<th>Name</th>
-											<th>Description</th>
 											<th>Status</th>
-											<th>Avatar</th>
 											<th>Control</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<%--                                <c:if test="${sys_users != null}">--%>
-										<%--                                    <c:forEach items="${sys_users}" var="sys_user">--%>
-										<%--                                        <tr>--%>
-										<%--                                            <td>${sys_user.name}</td>--%>
-										<%--                                            <td>${sys_user.phone}</td>--%>
-										<%--                                            <td>${sys_user.gender}</td>--%>
-										<%--                                            <td>${sys_user.address}</td>--%>
-										<%--                                            <td>${sys_user.systemUserStatus}</td>--%>
-										<%--                                            <td>${sys_user.level}</td>--%>
-										<%--                                            <td>--%>
-										<%--                                                <c:if test="${sys_user.avatar != null}">--%>
-										<%--                                                    <img src="<c:url value="http://localhost:8081/storage/systemUser/avatar/${sys_user.avatar}"/>"--%>
-										<%--                                                         alt="avatar"--%>
-										<%--                                                         width="55" height="55">--%>
-										<%--                                                </c:if>--%>
-										<%--                                                <c:if test="${sys_user.avatar == null}">--%>
-										<%--                                                    <img src="<c:url value='${sys_user.gender == "FEMALE" ? "/img/undraw_profile_1.svg" : "/img/undraw_profile.svg"}' />"--%>
-										<%--                                                         alt="avatar"--%>
-										<%--                                                         width="55" height="55">--%>
-										<%--                                                </c:if>--%>
-										<%--                                            </td>--%>
-										<%--                                            <td style="width: 18%">--%>
-										<%--                                                <a--%>
-										<%--                                                        href="${pageContext.request.contextPath}/systemUsers/update/${sys_user.id}"--%>
-										<%--                                                        class="btn btn-warning btn-sm">Update</a>--%>
-										<%--                                                <a href="${pageContext.request.contextPath}/systemUsers/delete/${sys_user.id}"--%>
-										<%--                                                   class="btn btn-danger btn-sm" data-toggle="modal"--%>
-										<%--                                                   data-target="#deleteUserModal_${sys_user.id}">Delete</a>--%>
-										<%--                                                <a href="${pageContext.request.contextPath}/systemUsers/detail/${sys_user.id}"--%>
-										<%--                                                   class="btn btn-info btn-sm">Detail</a>--%>
-
-
-										<%--                                                <!-- Delete User Modal-->--%>
-										<%--                                                <div class="modal fade" id="deleteUserModal_${sys_user.id}"--%>
-										<%--                                                     tabindex="-1" role="dialog" aria-labelledby="deleteLabel"--%>
-										<%--                                                     aria-hidden="true">--%>
-										<%--                                                    <div class="modal-dialog" role="document">--%>
-										<%--                                                        <div class="modal-content">--%>
-										<%--                                                            <div class="modal-header">--%>
-										<%--                                                                <h5 class="modal-title" id="deleteLabel">Ready to--%>
-										<%--                                                                    delete?</h5>--%>
-										<%--                                                                <button class="close" type="button" data-dismiss="modal"--%>
-										<%--                                                                        aria-label="Close">--%>
-										<%--                                                                    <span aria-hidden="true">×</span>--%>
-										<%--                                                                </button>--%>
-										<%--                                                            </div>--%>
-										<%--                                                            <div class="modal-body">Select "Yes" below if you are ready--%>
-										<%--                                                                to delete this user.--%>
-										<%--                                                            </div>--%>
-										<%--                                                            <div class="modal-footer">--%>
-										<%--                                                                <button class="btn btn-secondary" type="button"--%>
-										<%--                                                                        data-dismiss="modal">Cancel--%>
-										<%--                                                                </button>--%>
-										<%--                                                                <a class="btn btn-primary"--%>
-										<%--                                                                   href="${pageContext.request.contextPath}/systemUsers/delete/${sys_user.id}">Yes</a>--%>
-										<%--                                                            </div>--%>
-										<%--                                                        </div>--%>
-										<%--                                                    </div>--%>
-										<%--                                                </div>--%>
-										<%--                                            </td>--%>
-										<%--                                        </tr>--%>
-										<%--                                    </c:forEach>--%>
-										<%--                                </c:if>--%>
-										<tr>
-											<td>12346b1b-69bf-4331-8193-e1d86c824225</td>
-											<td>Gaming</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><a href="updateUser.html"
-												class="btn btn-warning btn-sm">Update</a> <a href="#"
-												class="btn btn-danger btn-sm" data-toggle="modal"
-												data-target="#deleteUserModal">Delete</a> <a
-												href="${pageContext.request.contextPath}/systemUsers/detail/1"
-												class="btn btn-info btn-sm">Detail</a></td>
-										</tr>
-										<tr>
-											<td>12346b1b-69bf-4331-8193-e1d86c824225</td>
-											<td>Gaming</td>
-											<td></td>
-											<td></td>
-											<td></td>
-
-											<td><a href="updateUser.html"
-												class="btn btn-warning btn-sm">Update</a> <a href="#"
-												class="btn btn-danger btn-sm" data-toggle="modal"
-												data-target="#deleteUserModal">Delete</a> <a
-												href="${pageContext.request.contextPath}/systemUsers/detail/1"
-												class="btn btn-info btn-sm">Detail</a></td>
-										</tr>
-										<tr>
-											<td>12346b1b-69bf-4331-8193-e1d86c824225</td>
-											<td>Gaming</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><a href="updateUser.html"
-												class="btn btn-warning btn-sm">Update</a> <a href="#"
-												class="btn btn-danger btn-sm" data-toggle="modal"
-												data-target="#deleteUserModal">Delete</a> <a
-												href="${pageContext.request.contextPath}/systemUsers/detail/1"
-												class="btn btn-info btn-sm">Detail</a></td>
-										</tr>
-										<tr>
-											<td>12346b1b-69bf-4331-8193-e1d86c824225</td>
-											<td>Gaming</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><a href="updateUser.html"
-												class="btn btn-warning btn-sm">Update</a> <a href="#"
-												class="btn btn-danger btn-sm" data-toggle="modal"
-												data-target="#deleteUserModal">Delete</a> <a
-												href="${pageContext.request.contextPath}/systemUsers/detail/1"
-												class="btn btn-info btn-sm">Detail</a></td>
-										</tr>
-										<tr>
-											<td>12346b1b-69bf-4331-8193-e1d86c824225</td>
-											<td>Gaming</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><a href="updateUser.html"
-												class="btn btn-warning btn-sm">Update</a> <a href="#"
-												class="btn btn-danger btn-sm" data-toggle="modal"
-												data-target="#deleteUserModal">Delete</a> <a
-												href="${pageContext.request.contextPath}/systemUsers/detail/1"
-												class="btn btn-info btn-sm">Detail</a></td>
-										</tr>
-
-										<tr>
-											<td>12346b1b-69bf-4331-8193-e1d86c824225</td>
-											<td>Gaming</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><a href="updateUser.html"
-												class="btn btn-warning btn-sm">Update</a> <a href="#"
-												class="btn btn-danger btn-sm" data-toggle="modal"
-												data-target="#deleteUserModal">Delete</a> <a
-												href="${pageContext.request.contextPath}/systemUsers/detail/1"
-												class="btn btn-info btn-sm">Detail</a></td>
-										</tr>
-										<tr>
-											<td>12346b1b-69bf-4331-8193-e1d86c824225</td>
-											<td>Gaming</td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><a href="updateUser.html"
-												class="btn btn-warning btn-sm">Update</a> <a href="#"
-												class="btn btn-danger btn-sm" data-toggle="modal"
-												data-target="#deleteUserModal">Delete</a> <a
-												href="${pageContext.request.contextPath}/systemUsers/detail/1"
-												class="btn btn-info btn-sm">Detail</a></td>
-										</tr>
+										<c:forEach var="cat" items="${categories}">
+											<tr>
+												<td><c:out value="${cat.id}" /></td>
+												<td><c:out value="${cat.name}" /></td>
+												<td><c:out value="${cat.status}" /></td>
+												<td>
+													<form
+														action="${pageContext.request.contextPath}/usagecategories/value"
+														method="get" style="display: inline;">
+														<input type="hidden" name="id" value="${cat.name}" />
+														<button class="btn btn-info btn-sm">Value</button>
+													</form>
+													<form
+														action="${pageContext.request.contextPath}/usagecategories/update"
+														method="get" style="display: inline;">
+														<input type="hidden" name="id" value="${cat.id}" />
+														<button class="btn btn-warning btn-sm">Update</button>
+													</form>
+													<form
+														action="${pageContext.request.contextPath}/usagecategories/delete"
+														method="post" style="display: inline;">
+														<input type="hidden" name="id" value="${cat.id}" />
+														<button class="btn btn-danger btn-sm">Delete</button>
+													</form>
+												</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

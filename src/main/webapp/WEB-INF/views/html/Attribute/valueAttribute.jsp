@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,67 +104,26 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Usage Categories</h1>
+					<h1 class="h3 mb-2 text-gray-800">Attribute Value</h1>
 					<p class="mb-4">This is a Usage Category management table,
 						displaying user data such as name, phone, status and so on.</p>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">Add Usage
-								Category</h6>
+							<h6 class="m-0 font-weight-bold text-primary">  ${attributeName}</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%"
 									cellspacing="0">
-
-									<form:form method="POST" modelAttribute="usageCategory"
-										enctype="multipart/form-data"
-										action="${pageContext.request.contextPath}/usagecategories/save">
-
-										<div class="form-group">
-
-											<label for="name">Name</label>
-											<form:input path="name" cssClass="form-control" id="name" />
-
-
-
-										</div>
-
-										<div class="form-group">
-											<label>Status</label>
-											<div class="form-check" style="margin-left: 5px;">
-												<input class="form-check-input" type="radio" name="status"
-													id="statusActive" value="active" checked> <label
-													class="form-check-label" for="statusActive">Active</label>
-											</div>
-											<div class="form-check" style="margin-left: 5px;">
-												<input class="form-check-input" type="radio" name="status"
-													id="statusInactive" value="inactive"> <label
-													class="form-check-label" for="statusInactive">Inactive</label>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="mb-3">
-												<label for="avatar" class="form-label">Avatar</label> <input
-													class="form-control" type="file" id="avatar" name="avatar"
-													accept="image/*">
-											</div>
-										</div>
-										<div class="form-group">
-											<label for="description">Description</label>
-											<form:textarea path="description" cssClass="form-control"
-												id="description" rows="5"></form:textarea>
-										</div>
-
-										<div class="button-group">
-											<button type="submit" class="btn btn-outline-primary">Submit</button>
-											<a href="${pageContext.request.contextPath}/usage-category"
-												class="btn btn-outline-danger">Cancel</a>
-										</div>
-									</form:form>
+									<tbody>
+										<c:forEach var="val" items="${values}">
+											<tr>
+												<td><c:out value="${val.id}" /></td>
+												<td><c:out value="${val.value}" /></td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
