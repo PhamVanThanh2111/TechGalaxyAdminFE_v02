@@ -141,7 +141,7 @@
                                             <td class="align-middle">${sys_user.level}</td>
                                             <td class="align-middle">
                                                 <c:if test="${sys_user.avatar != null}">
-                                                    <img src="<c:url value="http://localhost:8081/storage/systemUser/avatar/${sys_user.avatar}"/>"
+                                                    <img src="<c:url value="http://localhost:8080/storage/systemUser/avatar/${sys_user.avatar}"/>"
                                                          alt="avatar"
                                                          width="55" height="55">
                                                 </c:if>

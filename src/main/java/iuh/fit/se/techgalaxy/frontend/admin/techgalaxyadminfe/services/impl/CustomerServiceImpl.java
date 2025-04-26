@@ -24,24 +24,8 @@ public class CustomerServiceImpl implements CustomerService {
     private final ObjectMapper objectMapper;
     private static final String ENDPOINT = "http://localhost:8081";
 
-    private static final String DEFAULT_MALE_AVATAR = "undraw_profile.svg";
-    private static final String DEFAULT_FEMALE_AVATAR = "undraw_profile_1.svg";
-
-    private void setDefaultAvatarIfMissing(CustomerRequest customerRequest) {
-        if (isAvatarMissing(customerRequest)) {
-            customerRequest.setAvatar(getAvatarBasedOnGender(customerRequest));
-        }
-    }
-
     private boolean isAvatarMissing(CustomerRequest customerRequest) {
         return customerRequest.getAvatar() == null || customerRequest.getAvatar().isEmpty();
-    }
-
-    private String getAvatarBasedOnGender(CustomerRequest customerRequest) {
-        if (customerRequest.getGender() == Gender.FEMALE) {
-            return DEFAULT_FEMALE_AVATAR;
-        }
-        return DEFAULT_MALE_AVATAR;
     }
 
     public CustomerServiceImpl(RestClient restClient, ObjectMapper objectMapper) {
@@ -116,8 +100,6 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerRequest.getPhone() == null || customerRequest.getPhone().isEmpty())
             customerRequest.setPhone(null);
 
-        setDefaultAvatarIfMissing(customerRequest);
-
         return restClient.post()
                 .uri(ENDPOINT + "/customers")
                 .header("Authorization", "Bearer " + accessToken)
@@ -136,7 +118,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public DataResponse<CustomerResponse> update(CustomerRequest customerRequest, String accessToken) throws JsonProcessingException {
-        setDefaultAvatarIfMissing(customerRequest);
         return restClient.put()
                 .uri(ENDPOINT + "/customers/" + customerRequest.getId())
                 .header("Authorization", "Bearer " + accessToken)
