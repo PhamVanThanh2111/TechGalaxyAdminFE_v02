@@ -243,8 +243,8 @@
 					<h6 class="collapse-header">Role Manage</h6>
 					<a class="collapse-item"
 						href="${pageContext.request.contextPath}/roles">Show</a>
-					<a class="collapse-item"
-						href="${pageContext.request.contextPath}/roles/add">Add</a>
+<%--					<a class="collapse-item"--%>
+<%--						href="${pageContext.request.contextPath}/roles/add">Add</a>--%>
 				</div>
 			</div></li>
 
