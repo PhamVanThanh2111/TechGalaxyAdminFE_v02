@@ -115,6 +115,7 @@
                                     <th>Customer</th>
                                     <th>Employee</th>
                                     <th>Address</th>
+                                    <th>Payment Method</th>
                                     <th>Payment Status</th>
                                     <th>Order Status</th>
                                     <th>Edit Status</th>
@@ -125,6 +126,7 @@
                                     <th>Customer</th>
                                     <th>Employee</th>
                                     <th>Address</th>
+                                    <th>Payment Method</th>
                                     <th>Payment Status</th>
                                     <th>Order Status</th>
                                     <th>Edit Status</th>
@@ -141,6 +143,7 @@
                                             <td>${order.customer.name}</td>
                                             <td>${order.systemUser.name}</td>
                                             <td>${order.address}</td>
+                                            <td>${order.paymentMethod}</td>
                                             <td>${order.paymentStatus}</td>
                                             <td>${order.orderStatus}</td>
                                             <td>
@@ -153,7 +156,7 @@
 
                                         <!-- Dòng collapse hiển thị chi tiết -->
                                         <tr class="collapse" id="collapse-${order.id}">
-                                            <td colspan="6">
+                                            <td colspan="7">
                                                 <div class="p-3">
                                                     <h6>Order Details:</h6>
                                                     <ul>
